@@ -1,7 +1,4 @@
 const mongoose = require('mongoose');
-const dotenv = require("dotenv");
-
-dotenv.config();
 
 exports.connectDatabase = function () {
     mongoose.connect(process.env.CONNECTION_STRING, {
