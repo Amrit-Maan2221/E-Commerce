@@ -1,4 +1,4 @@
-const {signUpRoute} = require('./auth');
+const {signUpRoute, logInRoute} = require('./auth');
 
 const testRoute = {
     path: '/api/test',
@@ -8,7 +8,6 @@ const testRoute = {
     },
 };
 
-console.log(signUpRoute);
 module.exports = [
-    signUpRoute, testRoute
+    signUpRoute, logInRoute, testRoute
 ];
