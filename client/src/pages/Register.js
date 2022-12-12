@@ -33,12 +33,13 @@ function Register() {
     };
     try {
       const response = await axoisInstance.request(options);
+      console.log(response)
       const token = response.data;
       console.log(token);
       setToken(token);
       navigate("/");
     } catch (err) {
-      setErrorMessage(err.response.data);
+      setErrorMessage(err.response.statusText);
     }
   }
 
@@ -67,12 +68,12 @@ function Register() {
         value={usernameValue}
         onChange={e => setUsernameValue(e.target.value)} />
       <input
-        type="password"
+        type="Password"
         value={passwordValue}
         onChange={e => setPasswordValue(e.target.value)}
         placeholder="password" />
       <input
-        type="password"
+        type="Confirm Password"
         value={confirmPasswordValue}
         onChange={e => setConfirmPasswordValue(e.target.value)}
         placeholder="password" />

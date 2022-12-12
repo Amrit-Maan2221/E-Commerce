@@ -30,7 +30,7 @@ function Login() {
             setToken(token);
             navigate("/");
           } catch (err) {
-            setErrorMessage(err.response.data);
+            setErrorMessage(err.response.statusText);
           }
     }
 
