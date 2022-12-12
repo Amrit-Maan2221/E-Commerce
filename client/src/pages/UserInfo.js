@@ -47,6 +47,7 @@ function UserInfo() {
             setToken(token);
             setShowSuccessMessage(true);
           } catch (err) {
+            console.log(err)
             setShowErrorMessage(true);
           }
     }

@@ -73,10 +73,10 @@ function Register() {
         onChange={e => setPasswordValue(e.target.value)}
         placeholder="password" />
       <input
-        type="Confirm Password"
+        type="Password"
         value={confirmPasswordValue}
         onChange={e => setConfirmPasswordValue(e.target.value)}
-        placeholder="password" />
+        placeholder="Confirm Password" />
       <hr />
       <button
         disabled={

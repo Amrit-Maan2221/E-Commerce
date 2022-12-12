@@ -1,7 +1,8 @@
 const User = require("../models/UserModel");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
-
+const { v4 : uuid } = require('uuid');
+const { sendEmail } = require('../util/sendEmail');
 
 // Register a User
 exports.registerUser = async (req, res, next) => {
@@ -17,11 +18,32 @@ exports.registerUser = async (req, res, next) => {
             req.body.password,
             process.env.PASS_SECRET
         ).toString(),
+        verificationString: uuid()
     });
+
+
 
     try {
         const savedUser = await newUser.save();
-        const { password, ...userDetails } = savedUser._doc;
+        console.log(savedUser);
+        try {
+            await sendEmail({
+                to: savedUser.email,
+                from: 'commerce.aplus@gmail.com',
+                subject: 'Please verify your email',
+                text: `
+                    Thanks for signing up! To verify your email, click here:
+                    http://localhost:3000/verify-email/${savedUser.verificationString}
+                `,
+            });
+        } catch (e) {
+            console.log(e);
+            res.sendStatus(500).json("We have registered your account. Howeverm we were unable to send a mail on your email to verify you");
+        }
+
+        
+        const { password, verificationString, ...userDetails } = savedUser._doc;
+        userDetails.IsAdmin
         jwt.sign(
             {
                 ...userDetails
@@ -103,8 +125,13 @@ exports.updateUser = async (req, res) => {
         jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
             if (err) return res.status(401).json({ message: 'Unable to verify token' });
 
-            const { _id } = decoded;
+            const { _id, isVerified } = decoded;
+            console.log(!isVerified)
             if (_id !== userId) return res.status(403).json({ message: 'Not allowed to update that user\'s data' });
+            if (!isVerified){
+                console.log("I am here")
+                return res.status(403).json({ message: 'Please Verify your email' });
+            }
             try {
                 const user = await User.findByIdAndUpdate(_id, newUserData, {
                     new: true,

@@ -18,10 +18,8 @@ const UserSchema = new mongoose.Schema(
 			type: Boolean,
 			default: false,
 		},
-		isVerified: {
-			type: Boolean,
-			default: false,
-		},
+		isVerified: { type: Boolean, default: false },
+		verificationString: { type: String }
 	},
 	// Timestamp automatically create Created at and Updated at Field for the Model, date time is data type for both field
 	// For reference: https://masteringjs.io/tutorials/mongoose/timestamps#:~:text=Mongoose%20schemas%20have%20a%20timestamps,timestamps%20on%20a%20User%20model.&text=When%20you%20enable%20timestamps%2C%20Mongoose,updatedAt%20properties%20to%20your%20schema.
