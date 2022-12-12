@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./style/Login.css"
-//import axios from 'axios';
-//import { useToken } from '../auth/useToken';
+import { axoisInstance } from "../util/ApiBaseUrlInstance.js";
+import { useToken } from '../auth/useToken';
 
 function Login() {
+    const [token, setToken] = useToken();
+
     const navigate = useNavigate();
 
     const [errorMessage, setErrorMessage] = useState('');
@@ -13,7 +15,23 @@ function Login() {
     const [shouldShowPassword, setShouldShowPassword] = useState(false);
 
     const onLogInClicked = async () => {
-        alert('Log in not implemented yet');
+        const options = {
+            method: 'POST',
+            url: '/login',
+            data: {
+              email: emailValue,
+              password: passwordValue
+            }
+          };
+          try {
+            const response = await axoisInstance.request(options);
+            const token = response.data;
+            console.log(token);
+            setToken(token);
+            navigate("/");
+          } catch (err) {
+            setErrorMessage(err.response.data);
+          }
     }
 
     return (

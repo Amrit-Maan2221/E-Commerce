@@ -22,7 +22,6 @@ exports.registerUser = async (req, res, next) => {
     try {
         const savedUser = await newUser.save();
         const { password, ...userDetails } = savedUser._doc;
-        console.log(userDetails);
         jwt.sign(
 			{
 				...userDetails
@@ -66,7 +65,6 @@ exports.loginUser = async (req, res, next) => {
 		}
 
         const { password, ...userDetails } = user._doc;
-
 		const accessToken = jwt.sign(
 			{
 				...userDetails

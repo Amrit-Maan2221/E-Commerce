@@ -33,7 +33,6 @@ function Register() {
     };
     try {
       const response = await axoisInstance.request(options);
-      console.log(response);
       const token = response.data;
       console.log(token);
       setToken(token);
