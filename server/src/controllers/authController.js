@@ -21,10 +21,11 @@ exports.registerUser = async (req, res, next) => {
 
     try {
         const savedUser = await newUser.save();
+        const { password, ...userDetails } = savedUser._doc;
+        console.log(userDetails);
         jwt.sign(
 			{
-				id: savedUser._id,
-				isAdmin: savedUser.isAdmin,
+				...userDetails
 			},
 			process.env.JWT_SEC,
 			{ expiresIn: "3d" },
@@ -64,10 +65,11 @@ exports.loginUser = async (req, res, next) => {
 			return;
 		}
 
+        const { password, ...userDetails } = user._doc;
+
 		const accessToken = jwt.sign(
 			{
-				id: user._id,
-				isAdmin: user.isAdmin,
+				...userDetails
 			},
 			process.env.JWT_SEC,
 			{ expiresIn: "3d" },

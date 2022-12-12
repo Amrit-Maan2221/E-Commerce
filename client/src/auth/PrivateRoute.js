@@ -1,13 +1,15 @@
-import React from 'react'
-import { Redirect, Route } from 'react-router-dom';
+import React from 'react';
+import { Navigate } from 'react-router';
+import { Route } from 'react-router-dom';
+import { useUser } from './useUser';
 
-function PrivateRoute() {
+function PrivateRoute(props) {
     
-  const user = null;
-  if (!user) return <Redirect to="/login" />
-  return (
-    <Route {...props} />
-  )
+  const user = useUser();
+  console.log(user);
+  if (!user) return <Navigate to="/login" replace />;
+  return props.children;
 }
 
 export default PrivateRoute
+
