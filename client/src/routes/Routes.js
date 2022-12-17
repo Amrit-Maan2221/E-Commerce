@@ -7,6 +7,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import UserInfo from "../pages/UserInfo";
 import PrivateRoute from "../auth/PrivateRoute";
+import VerifyEmailPage from "../pages/VerifyEmailPage";
 
 
 const router = createBrowserRouter([
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
     },
+    {
+        path: "/verify-email",
+        element: <VerifyEmailPage/>,
+    }
 ]);
 
 export default router

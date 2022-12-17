@@ -8,7 +8,7 @@ function UserInfo() {
     const user = useUser();
     const [token, setToken] = useToken();
     console.log(user);
-    const { firstname , lastname, username, email, _id } = user;
+    const { firstname , lastname, username, email, _id, isVerified } = user;
 
     const navigate = useNavigate();
  
@@ -68,10 +68,11 @@ function UserInfo() {
 
 
     return (
-        <div className="content-container">
+        <div>
             <h1>Info for {emailValue}</h1>
-            {showSuccessMessage && <div className="success">Successfully saved user data!</div>}
-            {showErrorMessage && <div className="fail">Uh oh... something went wrong and we couldn't save changes</div>}
+            {!isVerified && <div>You won't be able to make any changes until you verify your email</div>}
+            {showSuccessMessage && <div>Successfully saved user data!</div>}
+            {showErrorMessage && <div>Uh oh... something went wrong and we couldn't save changes</div>}
             <label>
                 First Name:
                 <input

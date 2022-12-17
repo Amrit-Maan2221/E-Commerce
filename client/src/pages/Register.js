@@ -37,7 +37,7 @@ function Register() {
       const token = response.data;
       console.log(token);
       setToken(token);
-      navigate("/");
+      navigate("/verify-email");
     } catch (err) {
       setErrorMessage(err.response.statusText);
     }
