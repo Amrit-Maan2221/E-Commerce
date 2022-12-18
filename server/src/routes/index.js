@@ -1,4 +1,4 @@
-const {signUpRoute, logInRoute, updateUserInfoRoute, verifyEmailRoute, forgotPasswordRoute} = require('./auth');
+const {authRoutes} = require('./auth');
 
 const testRoute = {
     path: '/api/test',
@@ -9,5 +9,5 @@ const testRoute = {
 };
 
 module.exports = [
-    signUpRoute, logInRoute, updateUserInfoRoute, verifyEmailRoute, forgotPasswordRoute, testRoute
+    ...authRoutes,testRoute
 ];

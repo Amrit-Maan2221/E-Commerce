@@ -20,7 +20,8 @@ exports.registerUser = async (req, res, next) => {
             req.body.password,
             process.env.PASS_SECRET
         ).toString(),
-        verificationString: uuid()
+        verificationString: uuid(),
+        passwordResetCode: ''
     });
 
 
@@ -65,7 +66,6 @@ exports.loginUser = async (req, res, next) => {
         );
 
         const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
-
         const inputPassword = req.body.password;
 
         if (originalPassword !== inputPassword) {
@@ -103,7 +103,6 @@ exports.updateUser = async (req, res) => {
             console.log(!isVerified)
             if (_id !== userId) return res.status(403).json({ message: 'Not allowed to update that user\'s data' });
             if (!isVerified) {
-                console.log("I am here")
                 return res.status(403).json({ message: 'Please Verify your email' });
             }
             try {
@@ -157,7 +156,6 @@ exports.sendResetPasswordLinkController = async (req, res) => {
     const passwordResetCode = uuid();
     try {
         const result = await User.updateOne({ email }, { $set: { passwordResetCode } });
-        console.log(result)
         if (result.modifiedCount > 0) {
             try {
                 await sendEmail({
@@ -182,5 +180,31 @@ exports.sendResetPasswordLinkController = async (req, res) => {
     }
 }
 
+
+
+
+
+
+exports.resetPasswordController = async (req, res) => {
+    const { passwordResetCode } = req.params;
+    if (!req.body.newPassword) return res.status(403).json({ message: 'Please provide your new passsword' });
+    const isUserPresent = await User.findOne({
+        passwordResetCode
+    });
+    if (!isUserPresent) return res.status(401).json({ message: 'Please make sure your passsword link matches as sent in email' });
+    console.log(req.body.newPassword.toString())
+    const newPasswordHash = CryptoJS.AES.encrypt(
+        req.body.newPassword,
+        process.env.PASS_SECRET
+    ).toString();
+    const result = await User.updateOne({ passwordResetCode }, {
+        $set: { password: newPasswordHash },
+        $unset: { passwordResetCode: '' },
+    });
+    console.log(result);
+    if (result.modifiedCount == 0) return res.sendStatus(404);
+
+    res.sendStatus(200);
+}
 
 
