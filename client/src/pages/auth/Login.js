@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "./style/Login.css"
-import { axoisInstance } from "../util/ApiBaseUrlInstance.js";
-import { useToken } from '../auth/useToken';
+import { axoisInstance } from "../../util/ApiBaseUrlInstance.js";
+import { useToken } from '../../auth/useToken';
 
 function Login() {
     const [token, setToken] = useToken();

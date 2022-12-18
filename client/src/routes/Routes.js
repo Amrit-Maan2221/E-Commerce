@@ -3,11 +3,13 @@ import {
     Outlet
 } from "react-router-dom";
 
-import Login from "../pages/Login";
-import Register from "../pages/Register";
+import Login from "../pages/auth/Login";
+import Register from "../pages/auth/Register";
 import UserInfo from "../pages/UserInfo";
 import PrivateRoute from "../auth/PrivateRoute";
-import VerifyEmailPage from "../pages/VerifyEmailPage";
+import VerifyEmailPage from "../pages/auth/VerifyEmailPage";
+import EmailVerificationLandingPage from "../pages/auth/EmailVerificationLandingPage";
+
 
 
 const router = createBrowserRouter([
@@ -21,11 +23,15 @@ const router = createBrowserRouter([
         element: <Register />,
     },
     {
+        path: "/verify-email/:verificationString",
+        element: <EmailVerificationLandingPage />,
+    },
+    {
         path: "/login",
         element: <Login />,
     },
     {
-        path: "/verify-email",
+        path: "/verify-your-email",
         element: <VerifyEmailPage/>,
     }
 ]);

@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const { v4: uuid } = require('uuid');
 const { sendEmail } = require('../util/sendEmail');
 const sendToken = require("../util/jwtVerify");
+const { clientServerdomain } = require("../util/client");
 
 // Register a User
 exports.registerUser = async (req, res, next) => {
@@ -33,7 +34,7 @@ exports.registerUser = async (req, res, next) => {
                 subject: 'Please verify your email',
                 text: `
                     Thanks for signing up! To verify your email, click here:
-                    http://localhost:3000/verify-email/${savedUser.verificationString}
+                    ${clientServerdomain}/verify-email/${savedUser.verificationString}
                 `,
             });
         } catch (e) {
@@ -127,19 +128,25 @@ exports.updateUser = async (req, res) => {
 
 // Verify Email
 exports.verifyEmailController = async (req, res) => {
+    if(!req.body.verificationString){
+        return res.status(401).json({ message: 'The verification code cannot be found' });
+    }
     try {
         const result = await User.findOne({
             verificationString: req.body.verificationString
         });
         if (!result) return res.status(401).json({ message: 'Unable to verify Verification code' });
+        if(result.isVerified) return res.status(401).json({ message: 'You are already Verified' });
 
         await User.updateOne({ _id: result._id }, {
-            $set: { isVerified: true }
+            $set: { isVerified: true}
         });
-
         const { password, verificationString, ...userDetails } = result._doc;
+        userDetails.isVerified = true;
         sendToken(userDetails, 200, res);
-    } catch (err) {
+    } 
+    catch (err) {
+        
         res.status(500).json(err);
     }
 }

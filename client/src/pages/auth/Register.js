@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { axoisInstance } from "../util/ApiBaseUrlInstance.js";
+import { axoisInstance } from "../../util/ApiBaseUrlInstance.js";
 import { useNavigate } from 'react-router-dom';
-import { useToken } from '../auth/useToken';
+import { useToken } from '../../auth/useToken';
 
 function Register() {
   const [token, setToken] = useToken();
@@ -37,7 +37,7 @@ function Register() {
       const token = response.data;
       console.log(token);
       setToken(token);
-      navigate("/verify-email");
+      navigate("/verify-your-email");
     } catch (err) {
       setErrorMessage(err.response.statusText);
     }
