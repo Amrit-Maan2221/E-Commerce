@@ -1,8 +1,9 @@
 const User = require("../models/UserModel");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
-const { v4 : uuid } = require('uuid');
+const { v4: uuid } = require('uuid');
 const { sendEmail } = require('../util/sendEmail');
+const sendToken = require("../util/jwtVerify");
 
 // Register a User
 exports.registerUser = async (req, res, next) => {
@@ -25,7 +26,6 @@ exports.registerUser = async (req, res, next) => {
 
     try {
         const savedUser = await newUser.save();
-        console.log(savedUser);
         try {
             await sendEmail({
                 to: savedUser.email,
@@ -37,26 +37,12 @@ exports.registerUser = async (req, res, next) => {
                 `,
             });
         } catch (e) {
-            console.log(e);
             res.sendStatus(500).json("We have registered your account. Howeverm we were unable to send a mail on your email to verify you");
         }
 
-        
+
         const { password, verificationString, ...userDetails } = savedUser._doc;
-        userDetails.IsAdmin
-        jwt.sign(
-            {
-                ...userDetails
-            },
-            process.env.JWT_SECRET,
-            { expiresIn: "3d" },
-            (err, token) => {
-                if (err) {
-                    return res.status(500).json(err);
-                }
-                res.status(200).json(token);
-            }
-        );
+        sendToken(userDetails, 200, res);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -87,20 +73,7 @@ exports.loginUser = async (req, res, next) => {
         }
 
         const { password, ...userDetails } = user._doc;
-        const accessToken = jwt.sign(
-            {
-                ...userDetails
-            },
-            process.env.JWT_SECRET,
-            { expiresIn: "3d" },
-            (err, token) => {
-                if (err) {
-                    return res.status(500).json(err);
-                }
-                res.status(200).json(token);
-            }
-        );
-        return;
+        sendToken(userDetails, 200, res);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -128,7 +101,7 @@ exports.updateUser = async (req, res) => {
             const { _id, isVerified } = decoded;
             console.log(!isVerified)
             if (_id !== userId) return res.status(403).json({ message: 'Not allowed to update that user\'s data' });
-            if (!isVerified){
+            if (!isVerified) {
                 console.log("I am here")
                 return res.status(403).json({ message: 'Please Verify your email' });
             }
@@ -138,15 +111,9 @@ exports.updateUser = async (req, res) => {
                     runValidators: true,
                     useFindAndModify: false,
                 });
-                
-            const { password, ...userDetails } = user._doc;
 
-            jwt.sign(userDetails, process.env.JWT_SECRET, { expiresIn: '3d' }, (err, token) => {
-                if (err) {
-                    return res.status(200).json(err);
-                }
-                res.status(200).json({ token });
-            });
+                const { password, ...userDetails } = user._doc;
+                sendToken(userDetails, 200, res);
             } catch (err) {
                 res.status(500).json(err);
             }
@@ -156,3 +123,26 @@ exports.updateUser = async (req, res) => {
         res.status(500).json(err);
     }
 }
+
+
+// Verify Email
+exports.verifyEmailController = async (req, res) => {
+    try {
+        const result = await User.findOne({
+            verificationString: req.body.verificationString
+        });
+        if (!result) return res.status(401).json({ message: 'Unable to verify Verification code' });
+
+        await User.updateOne({ _id: result._id }, {
+            $set: { isVerified: true }
+        });
+
+        const { password, verificationString, ...userDetails } = result._doc;
+        sendToken(userDetails, 200, res);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+
+
+

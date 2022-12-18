@@ -9,7 +9,6 @@ function UserInfo() {
     const [token, setToken] = useToken();
     console.log(user);
     const { firstname , lastname, username, email, _id, isVerified } = user;
-
     const navigate = useNavigate();
  
     const [firstNameValue, setFirstNameValue] = useState(firstname || "");
