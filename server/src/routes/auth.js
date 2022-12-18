@@ -1,4 +1,4 @@
-const {registerUser, loginUser, updateUser, verifyEmailController} = require("../controllers/authController");
+const {registerUser, loginUser, updateUser, verifyEmailController, sendResetPasswordLinkController} = require("../controllers/authController");
 
 
 //REGISTER
@@ -25,9 +25,18 @@ exports.updateUserInfoRoute = {
 }
 
 
-
+// Verify Email Route
 exports.verifyEmailRoute = {
     path: '/api/verify-email',
     method: 'put',
     handler: verifyEmailController
+}
+
+
+
+// Password Reset Route
+exports.forgotPasswordRoute = {
+    path: '/api/forgot-password/:email',
+    method: 'put',
+    handler: sendResetPasswordLinkController
 }

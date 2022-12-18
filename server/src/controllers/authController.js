@@ -128,7 +128,7 @@ exports.updateUser = async (req, res) => {
 
 // Verify Email
 exports.verifyEmailController = async (req, res) => {
-    if(!req.body.verificationString){
+    if (!req.body.verificationString) {
         return res.status(401).json({ message: 'The verification code cannot be found' });
     }
     try {
@@ -136,18 +136,49 @@ exports.verifyEmailController = async (req, res) => {
             verificationString: req.body.verificationString
         });
         if (!result) return res.status(401).json({ message: 'Unable to verify Verification code' });
-        if(result.isVerified) return res.status(401).json({ message: 'You are already Verified' });
 
         await User.updateOne({ _id: result._id }, {
-            $set: { isVerified: true}
+            $set: { isVerified: true }
         });
         const { password, verificationString, ...userDetails } = result._doc;
         userDetails.isVerified = true;
         sendToken(userDetails, 200, res);
-    } 
+    }
     catch (err) {
-        
+
         res.status(500).json(err);
+    }
+}
+
+
+
+exports.sendResetPasswordLinkController = async (req, res) => {
+    const { email } = req.params;
+    const passwordResetCode = uuid();
+    try {
+        const result = await User.updateOne({ email }, { $set: { passwordResetCode } });
+        console.log(result)
+        if (result.modifiedCount > 0) {
+            try {
+                await sendEmail({
+                    to: email,
+                    from: 'commerce.aplus@gmail.com',
+                    subject: 'Password Reset',
+                    text: `
+                        To reset your password, click this link:
+                        ${clientServerdomain}/reset-password/${passwordResetCode}
+                    `
+                });
+            } catch (e) {
+                console.log(e);
+                res.sendStatus(500);
+            }
+        }
+
+        res.sendStatus(200);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
     }
 }
 

@@ -26,5 +26,5 @@ routes.forEach(route => {
 
 
 const server = app.listen(process.env.PORT || 4000, () => {
-    console.log(`Example app listening at http://localhost:${process.env.PORT}`)
+    console.log(`Server listening at http://localhost:${process.env.PORT}`)
 })
