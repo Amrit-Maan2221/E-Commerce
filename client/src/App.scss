@@ -1,0 +1,30 @@
+// variables & functions
+// @import 'functions';
+@import './util/styles/variables';
+
+// base & layout
+@import './util/styles/base';
+@import './util/styles/breakpoints';
+@import './util/styles/commonStyles';
+// @import 'grid';
+
+// colors
+// @import "colors";
+
+// components (button, card, navbar etc)
+// @import 'components/card';
+// @import 'components/button';
+// @import 'components/navbar';
+
+// utilities (margin, padding, opacity, etc)
+// @import 'utilities';
+
+// import component styles
+@import './components/styles/Loader.scss';
+
+// import the applied code
+@import './pages/style/Test.scss';
+
+//auth
+@import './pages/auth/style/Login.scss'
+

@@ -4,6 +4,7 @@ import { axoisInstance } from "../../util/ApiBaseUrlInstance.js";
 import { useToken } from '../../auth/useToken';
 import { EmailVerificationSuccess } from './EmailVerificationSuccess';
 import EmailVerificationFail  from './EmailVerificationFail';
+import Loader from '../../components/Loader.js';
 
 function EmailVerificationLandingPage () {
     const [isLoading, setIsLoading] = useState(true);
@@ -34,7 +35,7 @@ function EmailVerificationLandingPage () {
         loadVerification();
     }, [verificationString]);
 
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading) return <Loader/>;
     if (!isSuccess) return <EmailVerificationFail message={`${errorMessage}`} />
     return <EmailVerificationSuccess />
 }

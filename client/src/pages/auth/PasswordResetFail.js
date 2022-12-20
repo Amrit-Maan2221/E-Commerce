@@ -4,12 +4,16 @@ function PasswordResetFail () {
     const navigate = useNavigate();
 
     return (
-        <div>
-            <h1>Uh oh...</h1>
-            <p>
-                Something went wrong while trying to reset your password.
-            </p>
-            <button onClick={() => navigate('/login')}>Back to Log in</button>
+        <div id="auth_container">
+            <div className="auth_wrapper">
+                <h1>Uh oh...</h1>
+                <p>
+                    Something went wrong while trying to reset your password.
+                </p>
+                <div className="input-control mt-2">
+                    <button onClick={() => navigate('/login')} className="input-submit">Back to Log in</button>
+                </div>
+            </div>
         </div>
     );
 }

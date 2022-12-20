@@ -11,6 +11,7 @@ import VerifyEmailPage from "../pages/auth/VerifyEmailPage";
 import EmailVerificationLandingPage from "../pages/auth/EmailVerificationLandingPage";
 import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage";
 import PasswordResetLandingPage from "../pages/auth/PasswordResetLandingPage";
+import Test from "../pages/Test";
 
 
 
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
     {
         path: "/reset-password/:passwordResetCode",
         element: <PasswordResetLandingPage />,
+    },
+    {
+        path: "/test",
+        element: <Test />,
     }
 ]);
 

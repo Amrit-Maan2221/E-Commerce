@@ -4,14 +4,18 @@ function EmailVerificationFail ({message}){
     const navigate = useNavigate();
 
     return (
-        <div className="content-container">
+        <div id="auth_container">
+        <div className="auth_wrapper">
             <h1>Uh oh...</h1>
             <p>
                 {(message == "") ? 
                 "Something went wrong while trying to verify your email" : `${message}`
                 }
             </p>
-            <button onClick={() => navigate('/register')}>Back to Sign-up</button>
+            <div className="input-control mt-2">
+                <button onClick={() => navigate('/register')} className="input-submit">Back to Sign-up</button>
+            </div>
+        </div>
         </div>
     );
 }

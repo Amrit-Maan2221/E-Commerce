@@ -24,23 +24,41 @@ function PasswordResetLandingPage() {
     if (isSuccess) return <PasswordResetSuccess />
 
     return (
-        <div className="content-container">
-            <h1>Reset Password</h1>
-            <p>Please enter a new password</p>
-            <input
-                type='password'
-                value={passwordValue}
-                onChange={e => setPasswordValue(e.target.value)}
-                placeholder="Password" />
-            <input
-                type='password'
-                value={confirmPasswordValue}
-                onChange={e => setConfirmPasswordValue(e.target.value)}
-                placeholder="Confirm Password" />
-            <button
-                disabled={!passwordValue || !confirmPasswordValue || passwordValue !== confirmPasswordValue}
-                onClick={onResetClicked}
-            >Reset Password</button>
+        <div id="auth_container">
+            <div className="auth_wrapper">
+                <div className="heading">
+                    <h1 className="text text-large">Reset Password</h1>
+                    <p className="text text-normal">Please enter a new password</p>
+                    <div className='auth-failMsg-Container'>
+                        {(passwordValue && confirmPasswordValue && (passwordValue !== confirmPasswordValue) ) && <p className="text text-normal text-fail">Password and Confirm Password do not match</p>}
+                    </div>
+                </div>
+                <div className="auth_form">
+                    <div className="input-control">
+                        <label htmlFor="password" className="input-label" hidden>Password</label>
+                        <input id="password" name="password"
+                            type='password' className="input-field"
+                            value={passwordValue}
+                            onChange={e => setPasswordValue(e.target.value)}
+                            placeholder="Password" />
+
+                    </div>
+                    <div className="input-control">
+                        <label htmlFor="confirmPassword" className="input-label" hidden>Confirm Password</label>
+                        <input id="confirmPassword" name="confirmPassword"
+                            type='password' className="input-field"
+                            value={confirmPasswordValue}
+                            onChange={e => setConfirmPasswordValue(e.target.value)}
+                            placeholder="Confirm Password" />
+                    </div>
+                    <div className="input-control">
+                        <button className="input-submit"
+                            disabled={!passwordValue || !confirmPasswordValue || passwordValue !== confirmPasswordValue}
+                            onClick={onResetClicked}
+                        >Reset Password</button>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
