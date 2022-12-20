@@ -3,9 +3,9 @@
 @import './util/styles/variables';
 
 // base & layout
-@import './util/styles/base';
 @import './util/styles/breakpoints';
 @import './util/styles/commonStyles';
+@import './util/styles/base';
 // @import 'grid';
 
 // colors
@@ -21,10 +21,12 @@
 
 // import component styles
 @import './components/styles/Loader.scss';
+@import './components/styles/Navbar.scss';
+@import './components/styles/HeroSection.scss';
 
 // import the applied code
-@import './pages/style/Test.scss';
 
 //auth
-@import './pages/auth/style/Login.scss'
+@import './pages/auth/style/Auth.scss';
+
 

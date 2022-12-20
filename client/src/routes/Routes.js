@@ -8,6 +8,7 @@ import UserInfo from "../pages/UserInfo";
 import PrivateRoute from "../auth/PrivateRoute";
 import Test from "../pages/Test";
 import { AuthRoutes } from "./AuthRoutes";
+import Homepage from "../pages/Homepage";
 
 
 
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
 
     {
         path: "/",
-        element: <PrivateRoute><UserInfo /></PrivateRoute>,
+        element: <Homepage/>,
     },
     ...AuthRoutes
     ,
