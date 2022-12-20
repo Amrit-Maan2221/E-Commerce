@@ -7,7 +7,5 @@ exports.connectDatabase = function () {
     })
         .then((data) => {
             console.log(`Mongodb connected with server: ${data.connection.host}`);
-        }).catch((e) => {
-            console.log(`no connection`);
-        });
+        })
 }

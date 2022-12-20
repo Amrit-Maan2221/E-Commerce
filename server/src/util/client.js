@@ -1,1 +1,0 @@
-exports.clientServerdomain = "http://localhost:3000";
