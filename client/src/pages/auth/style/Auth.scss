@@ -15,10 +15,14 @@
     @include centerContent();
     // max-width: 80rem;
     width: 100%;
-    height: 100vh;
-	min-height: 100vh;
+    height: 100vh - 11.8495vh;;
+	min-height: 100vh - 11.8495vh;;
     padding: 0 2rem;
 	margin: 0 auto;
+
+    h1{
+        font-size: 2rem;
+    }
 
     .auth_wrapper {
 		max-width: 28rem;

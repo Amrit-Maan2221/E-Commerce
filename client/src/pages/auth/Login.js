@@ -41,6 +41,7 @@ function Login() {
   }
 
   return (
+    <>
     <div id="auth_container">
       <div className="auth_wrapper">
         <div className="heading">
@@ -107,6 +108,7 @@ function Login() {
                     </div> */}
       </div>
     </div>
+    </>
   )
 }
 

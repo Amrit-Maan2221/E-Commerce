@@ -31,7 +31,7 @@ function ForgotPasswordPage() {
             <div className="auth_wrapper">
                 <div className="heading">
                     <h1 className="text text-large">Forgot Password</h1>
-                    <p className="text text-normal">You remember your passowrd? <span><Link to='/login' className="text text-links">Log In</Link></span></p>
+                    <p className="text text-normal">You remember your password? <span><Link to='/login' className="text text-links">Log In</Link></span></p>
                     <p className="text text-normal">Enter your email and we'll send you a reset link</p>
 
                     <div className='auth-failMsg-Container'>
