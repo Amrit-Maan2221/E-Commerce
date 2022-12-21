@@ -77,7 +77,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 
 
 // updateUser
-exports.updateUser = catchAsyncErrors(async (req, res) => {
+exports.updateUser = catchAsyncErrors(async (req, res, next) => {
     const { authorization } = req.headers;
 
     if (!authorization) {
@@ -118,7 +118,7 @@ exports.updateUser = catchAsyncErrors(async (req, res) => {
 
 
 // Verify Email
-exports.verifyEmailController =  catchAsyncErrors(async (req, res) => {
+exports.verifyEmailController =  catchAsyncErrors(async (req, res, next) => {
     if (!req.body.verificationString) {
         return next(new ErrorHander("The verification code cannot be found", 401));
     }
@@ -137,7 +137,7 @@ exports.verifyEmailController =  catchAsyncErrors(async (req, res) => {
 
 
 
-exports.sendResetPasswordLinkController =  catchAsyncErrors(async (req, res) => {
+exports.sendResetPasswordLinkController =  catchAsyncErrors(async (req, res, next) => {
     const { email } = req.params;
     const passwordResetCode = uuid();
         const result = await User.updateOne({ email }, { $set: { passwordResetCode } });
@@ -165,7 +165,7 @@ exports.sendResetPasswordLinkController =  catchAsyncErrors(async (req, res) => 
 
 
 
-exports.resetPasswordController =  catchAsyncErrors(async (req, res) => {
+exports.resetPasswordController =  catchAsyncErrors(async (req, res, next) => {
     const { passwordResetCode } = req.params;
     if (!req.body.newPassword) {
         return next(new ErrorHander("Please provide your new passsword", 401));

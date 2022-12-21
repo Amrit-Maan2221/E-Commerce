@@ -1,4 +1,5 @@
 const {authRoutes} = require('./auth');
+const {contactUsRoutes} = require('./contactUs');
 
 const testRoute = {
     path: '/api/test',
@@ -9,5 +10,5 @@ const testRoute = {
 };
 
 module.exports = [
-    ...authRoutes,testRoute
+    ...authRoutes,...contactUsRoutes,testRoute
 ];

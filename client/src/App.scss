@@ -23,10 +23,13 @@
 @import './components/styles/Loader.scss';
 @import './components/styles/Navbar.scss';
 @import './components/styles/HeroSection.scss';
+@import './components/styles/Services.scss';
+@import './components/styles/Trusted.scss';
 
 // import the applied code
 
 //auth
 @import './pages/auth/style/Auth.scss';
+@import './pages/style/Contact.scss'
 
 
