@@ -1,5 +1,17 @@
-.services-section {
+// variables & functions
+// @import 'functions';
+@import '../../util/styles/variables';
 
+// base & layout
+@import '../../util/styles/breakpoints';
+@import '../../util/styles/commonStyles';
+@import '../../util/styles/base';
+
+
+
+
+.services-section {
+    margin: 2rem 0;
     .grid {
         gap: 4.8rem;
     }

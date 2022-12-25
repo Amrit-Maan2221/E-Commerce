@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { axoisInstance } from "../../util/ApiBaseUrlInstance.js";
 import { useToken } from '../../auth/useToken';
 import { Link } from "react-router-dom";
+import './style/Auth.scss'
 
 function Login() {
   const [token, setToken] = useToken();

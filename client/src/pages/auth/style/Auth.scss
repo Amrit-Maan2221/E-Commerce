@@ -1,9 +1,9 @@
-// @mixin oAuthStyles($color){
-//     font-size: 1.65rem;
-//     line-height: inherit;
-//     margin-right: 0.5rem;
-//     color: $color;
-// }
+@import '../../../util/styles/variables';
+
+// base & layout
+@import '../../../util/styles/breakpoints';
+@import '../../../util/styles/commonStyles';
+@import '../../../util/styles/base';
 
 
 #auth_container{

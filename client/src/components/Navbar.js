@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useUser } from '../auth/useUser';
 import { FiShoppingCart } from "react-icons/fi";
 import { CgMenu, CgClose } from "react-icons/cg";
+import "./styles/Navbar.scss"
 
 function Navbar() {
     const user = useUser();

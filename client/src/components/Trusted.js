@@ -1,3 +1,5 @@
+import "./styles/Trusted.scss"
+
 const Trusted = () => {
   return (
     <section className="brand-section">

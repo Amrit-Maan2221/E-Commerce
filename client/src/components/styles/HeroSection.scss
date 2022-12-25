@@ -1,3 +1,13 @@
+// variables & functions
+// @import 'functions';
+@import '../../util/styles/variables';
+
+// base & layout
+@import '../../util/styles/breakpoints';
+@import '../../util/styles/commonStyles';
+@import '../../util/styles/base';
+
+
 #hero-section {
     padding: 12rem 0;
 

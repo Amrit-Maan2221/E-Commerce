@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { axoisInstance } from "../../util/ApiBaseUrlInstance.js";
 import PasswordResetSuccess from './PasswordResetSuccess';
 import PasswordResetFail from './PasswordResetFail';
+import './style/Auth.scss'
 
 function PasswordResetLandingPage() {
     const [isSuccess, setIsSuccess] = useState(false);

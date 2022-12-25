@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from "../auth/useUser";
 import { axoisInstance } from "../util/ApiBaseUrlInstance.js";
+import './style/Contact.scss';
 
 const Contact = () => {
   const user = useUser();

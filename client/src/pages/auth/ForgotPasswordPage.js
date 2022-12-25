@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { axoisInstance } from "../../util/ApiBaseUrlInstance.js";
 import { Link } from "react-router-dom";
+import './style/Auth.scss'
 
 function ForgotPasswordPage() {
     const [errorMessage, setErrorMessage] = useState('');

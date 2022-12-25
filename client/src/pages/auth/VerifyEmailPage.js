@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './style/Auth.scss'
 
 function VerifyEmailPage() {
     const navigate = useNavigate();

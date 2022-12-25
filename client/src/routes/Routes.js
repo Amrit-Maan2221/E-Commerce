@@ -12,6 +12,7 @@ import Homepage from "../pages/Homepage";
 import Contact from "../pages/Contact";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import ErrorPage from "../pages/ErrorPage";
 
 const Layout = () => {
     return (
@@ -37,15 +38,15 @@ const router = createBrowserRouter([
             {
                 path: "/contact",
                 element: <Contact />,
+            },
+            {
+                path: "*",
+                element: <ErrorPage />,
             }
         ]
     },
     ...AuthRoutes
     ,
-    {
-        path: "/",
-        element: <Contact />,
-    },
     {
         path: "/test",
         element: <Test />,

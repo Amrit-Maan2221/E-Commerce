@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import './style/Auth.scss'
 
 function EmailVerificationFail ({message}){
     const navigate = useNavigate();

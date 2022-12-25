@@ -1,3 +1,14 @@
+// variables & functions
+// @import 'functions';
+@import '../../util/styles/variables';
+
+// base & layout
+@import '../../util/styles/breakpoints';
+@import '../../util/styles/commonStyles';
+@import '../../util/styles/base';
+
+
+
 .brand-section{
     padding: 9rem 0;
     background-color: map-get($colors , "bg");

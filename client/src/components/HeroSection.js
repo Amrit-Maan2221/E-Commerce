@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import './styles/HeroSection.scss'
 
 function HeroSection({myData}) {
     const { name, imageURL } = myData;

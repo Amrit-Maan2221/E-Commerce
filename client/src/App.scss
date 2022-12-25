@@ -1,11 +1,11 @@
 // variables & functions
 // @import 'functions';
-@import './util/styles/variables';
+//@import './util/styles/variables';
 
 // base & layout
-@import './util/styles/breakpoints';
-@import './util/styles/commonStyles';
-@import './util/styles/base';
+//@import './util/styles/breakpoints';
+//@import './util/styles/commonStyles';
+//@import './util/styles/base';
 // @import 'grid';
 
 // colors
@@ -20,16 +20,15 @@
 // @import 'utilities';
 
 // import component styles
-@import './components/styles/Loader.scss';
-@import './components/styles/Navbar.scss';
-@import './components/styles/HeroSection.scss';
-@import './components/styles/Services.scss';
-@import './components/styles/Trusted.scss';
+//@import './components/styles/Loader.scss';
+// @import './components/styles/Navbar.scss';
+// @import './components/styles/HeroSection.scss';
+// @import './components/styles/Services.scss';
+// @import './components/styles/Trusted.scss';
 
 // import the applied code
 
 //auth
-@import './pages/auth/style/Auth.scss';
-@import './pages/style/Contact.scss'
+// @import './pages/auth/style/Auth.scss';
 
 
