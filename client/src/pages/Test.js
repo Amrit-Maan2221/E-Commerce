@@ -1,44 +1,162 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { useToken } from '../auth/useToken';
+import './style/Test.scss'
 
 function Test() {
+    const [token, setToken] = useToken();
+    const [name, setName] = useState("");
+    const [price, setPrice] = useState(0);
+    const [description, setDescription] = useState("");
+    const [category, setCategory] = useState("");
+    const [Stock, setStock] = useState(0);
+    const [images, setImages] = useState([]);
+    const [imagesPreview, setImagesPreview] = useState([]);
+
+    const categories = [
+        "Laptop",
+        "Footwear",
+        "Bottom",
+        "Tops",
+        "Attire",
+        "Camera",
+        "SmartPhones",
+    ];
+
+
+    const createProductSubmitHandler = async (e) => {
+        e.preventDefault();
+
+        const myForm = new FormData();
+
+        myForm.set("name", name);
+        myForm.set("price", price);
+        myForm.set("description", description);
+        myForm.set("category", category);
+        myForm.set("Stock", Stock);
+
+        images.forEach((image) => {
+            myForm.append("images", image);
+        });
+        const config = {
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+        };
+        try {
+            const { data } = await axios.post(
+                `http://localhost:5001/api/product/create`,
+                myForm,
+                config
+            );
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
+    const createProductImagesChange = (e) => {
+        const files = Array.from(e.target.files);
+
+        setImages([]);
+        setImagesPreview([]);
+
+        files.forEach((file) => {
+            const reader = new FileReader();
+
+            reader.onload = () => {
+                if (reader.readyState === 2) {
+                    setImagesPreview((old) => [...old, reader.result]);
+                    setImages((old) => [...old, reader.result]);
+                }
+            };
+
+            reader.readAsDataURL(file);
+        });
+    };
     return (
-        <div className="register-container">
-            <div className="wrapper">
-                <div className="title">Register</div>
-                <div className="content">
-                    <div class="user-details">
-                        <div class="input-box">
-                            <label htmlFor="firstName" className="details">First Name</label>
-                            <input type="text" placeholder="Enter your name"/>
+        <>
+            <div className="dashboard">
+                <div className="newProductContainer">
+                    <form
+                        className="createProductForm"
+                        encType="multipart/form-data"
+                        onSubmit={createProductSubmitHandler}
+                    >
+                        <h1>Create Product</h1>
+                        <div>
+                            <input
+                                type="text"
+                                placeholder="Product Name"
+                                required
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
                         </div>
-                        <div class="input-box">
-                            <label htmlFor="lastName" className="details">Last Name</label>
-                            <input type="text" placeholder="Enter your username" required/>
+                        <div>
+                            <input
+                                type="number"
+                                placeholder="Price"
+                                required
+                                onChange={(e) => setPrice(e.target.value)}
+                            />
                         </div>
-                        <div class="input-box">
-                            <label htmlFor="email" className="details">Email</label>
-                            <input type="text" placeholder="Enter your email" required/>
+
+                        <div>
+
+                            <textarea
+                                placeholder="Product Description"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                                cols="30"
+                                rows="1"
+                            ></textarea>
                         </div>
-                        <div class="input-box">
-                            <label htmlFor="userName" className="details">User Name</label>
-                            <input type="text" placeholder="Enter your number" required/>
+
+                        <div>
+                            <select onChange={(e) => setCategory(e.target.value)}>
+                                <option value="">Choose Category</option>
+                                {categories.map((cate) => (
+                                    <option key={cate} value={cate}>
+                                        {cate}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
-                        <div class="input-box">
-                            <label htmlFor="password" className="details">Password</label>
-                            <input type="text" placeholder="Enter your number" required/>
+
+                        <div>
+                            <input
+                                type="number"
+                                placeholder="Stock"
+                                required
+                                onChange={(e) => setStock(e.target.value)}
+                            />
                         </div>
-                        <div class="input-box">
-                            <label htmlFor="confirmPassword" className="details">Confirm Password</label>
-                            <input type="text" placeholder="Enter your number" required/>
+
+                        <div id="createProductFormFile">
+                            <input
+                                type="file"
+                                name="avatar"
+                                accept="image/*"
+                                onChange={createProductImagesChange}
+                                multiple
+                            />
                         </div>
-                    </div>
-                    <div class="button">
-                        <input type="submit" value="Register"/>
-                    </div>
+
+                        <div id="createProductFormImage">
+                            {imagesPreview.map((image, index) => (
+                                <img key={index} src={image} alt="Product Preview" />
+                            ))}
+                        </div>
+
+                        <button
+                            id="createProductBtn"
+                            type="submit"
+                        >
+                            Create
+                        </button>
+                    </form>
                 </div>
             </div>
-
-        </div>
+        </>
     )
 }
 

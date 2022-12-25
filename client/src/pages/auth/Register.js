@@ -83,8 +83,8 @@ function Register() {
               onChange={e => setLastNameValue(e.target.value)} />
           </div>
           <div className="input-control">
-            <label htmlFor="lastName" className="input-label" hidden>User Name</label>
-            <input id="lastName" name="lastName"
+            <label htmlFor="userName" className="input-label" hidden>User Name</label>
+            <input id="userName" name="userName"
               placeholder="User Name"
               type="text" className="input-field"
               value={usernameValue}

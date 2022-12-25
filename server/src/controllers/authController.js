@@ -4,8 +4,7 @@ const jwt = require("jsonwebtoken");
 const { v4: uuid } = require('uuid');
 const { sendEmail } = require('../util/sendEmail');
 const sendToken = require("../util/jwtVerify");
-const { FRONTEND_URL } = require("../util/constants");
-const ErrorHander = require("../util/error handling/Error Handler");
+const ErrorHandler = require("../util/error handling/Error Handler");
 const { catchAsyncErrors } = require("../util/error handling/catchAsyncErrors");
 
 
@@ -13,7 +12,7 @@ const { catchAsyncErrors } = require("../util/error handling/catchAsyncErrors");
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     if (req.body.password.length < 8) {
-        return next(new ErrorHander("Password Length used 8 or more", 400));
+        return next(new ErrorHandler("Password Length used 8 or more", 400));
     }
     const newUser = new User({
         firstname: req.body.firstname,
@@ -35,11 +34,11 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
             subject: 'Please verify your email',
             text: `
                 Thanks for signing up! To verify your email, click here:
-                ${FRONTEND_URL}/verify-email/${savedUser.verificationString}
+                ${process.env.FRONTEND_URL}/verify-email/${savedUser.verificationString}
             `,
         });
     } catch (err) {
-        next(new ErrorHander());
+        next(new ErrorHandler());
     }
 
 
@@ -49,11 +48,11 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 });
 
 
-
+// login User
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
-        next(new ErrorHander("Log In Failed", 401));
+        next(new ErrorHandler("Log In Failed", 401));
         return;
     }
 
@@ -66,7 +65,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     const inputPassword = req.body.password;
 
     if (originalPassword !== inputPassword) {
-        next(new ErrorHander("Log In Failed", 401));
+        next(new ErrorHandler("Log In Failed", 401));
         return;
     }
 
@@ -81,7 +80,7 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
     const { authorization } = req.headers;
 
     if (!authorization) {
-        return next(new ErrorHander("Unable to process your process", 401));
+        return next(new ErrorHandler("Unable to process your process", 401));
     }
     const { userId } = req.params;
     const newUserData = {
@@ -91,13 +90,13 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
     };
     const token = authorization.split(' ')[1];
     jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-        if (err) return next(new ErrorHander("Unable to update your details", 401));
+        if (err) return next(new ErrorHandler("Unable to update your details", 401));
 
         const { _id, isVerified } = decoded;
         console.log(!isVerified)
         if (_id !== userId) return res.status(403).json({ message: 'Not allowed to update that user\'s data' });
         if (!isVerified) {
-            return next(new ErrorHander("Please Verify your email", 403));
+            return next(new ErrorHandler("Please Verify your email", 403));
         }
         try {
             const user = await User.findByIdAndUpdate(_id, newUserData, {
@@ -109,7 +108,7 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
             const { password, ...userDetails } = user._doc;
             sendToken(userDetails, 200, res);
         } catch (err) {
-            next(new ErrorHander());
+            next(new ErrorHandler());
         }
 
     })
@@ -120,12 +119,12 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
 // Verify Email
 exports.verifyEmailController =  catchAsyncErrors(async (req, res, next) => {
     if (!req.body.verificationString) {
-        return next(new ErrorHander("The verification code cannot be found", 401));
+        return next(new ErrorHandler("The verification code cannot be found", 401));
     }
         const result = await User.findOne({
             verificationString: req.body.verificationString
         });
-        if (!result) return next(new ErrorHander("Unable to verify Verification code", 401));
+        if (!result) return next(new ErrorHandler("Unable to verify Verification code", 401));
 
         await User.updateOne({ _id: result._id }, {
             $set: { isVerified: true }
@@ -136,7 +135,7 @@ exports.verifyEmailController =  catchAsyncErrors(async (req, res, next) => {
 });
 
 
-
+// send reset password
 exports.sendResetPasswordLinkController =  catchAsyncErrors(async (req, res, next) => {
     const { email } = req.params;
     const passwordResetCode = uuid();
@@ -149,11 +148,11 @@ exports.sendResetPasswordLinkController =  catchAsyncErrors(async (req, res, nex
                     subject: 'Password Reset',
                     text: `
                         To reset your password, click this link:
-                        ${FRONTEND_URL}/reset-password/${passwordResetCode}
+                        ${process.env.FRONTEND_URL}}/reset-password/${passwordResetCode}
                     `
                 });
             } catch (e) {
-                next(new ErrorHander());
+                next(new ErrorHandler());
             }
         }
 
@@ -164,17 +163,17 @@ exports.sendResetPasswordLinkController =  catchAsyncErrors(async (req, res, nex
 
 
 
-
+// reset password
 exports.resetPasswordController =  catchAsyncErrors(async (req, res, next) => {
     const { passwordResetCode } = req.params;
     if (!req.body.newPassword) {
-        return next(new ErrorHander("Please provide your new passsword", 401));
+        return next(new ErrorHandler("Please provide your new passsword", 401));
     }
 
     const isUserPresent = await User.findOne({
         passwordResetCode
     });
-    if (!isUserPresent) return next(new ErrorHander("Please make sure your passsword link matches as sent in email", 401));
+    if (!isUserPresent) return next(new ErrorHandler("Please make sure your passsword link matches as sent in email", 401));
 
     const newPasswordHash = CryptoJS.AES.encrypt(
         req.body.newPassword,
@@ -190,5 +189,7 @@ exports.resetPasswordController =  catchAsyncErrors(async (req, res, next) => {
 
     res.sendStatus(200);
 });
+
+
 
 

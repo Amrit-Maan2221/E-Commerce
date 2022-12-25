@@ -11,21 +11,29 @@ const routes = require('./src/routes');
 const errorHandlerMiddleware = require("./src/middleware/errorHandlerMiddleware");
 const { unhandledRejectionHandler } = require("./src/util/error handling/unhandledRejectionHandler");
 const { uncaughtExceptionHanndler } = require("./src/util/error handling/uncaughtExceptionHandler");
+var bodyParser = require('body-parser');
 
 // Handling Uncaught Exception
-uncaughtExceptionHanndler();
+//uncaughtExceptionHanndler();
+
+app.use(bodyParser.json({limit: "50mb"}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+app.use(cors());
 
 //connecting to database
 connectDatabase.connectDatabase();
 // Middleware
 app.use(express.json());
-app.use(cors());
+
+
+
 
 
 
 // Add all the routes to our Express server
 // exported from routes/index.js
 routes.forEach(route => {
+    console.log(route);
     app[route.method](route.path, route.handler);
 });
 
