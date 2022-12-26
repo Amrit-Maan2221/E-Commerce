@@ -19,7 +19,11 @@ const productSchema = new mongoose.Schema(
                 }
             }
         ],
-        Stock: {
+        colors: [{
+            type: String,
+            required: true
+        }],
+        stock: {
             type: Number,
             maxLength: [4, "Stock cannot exceed 4 characters"],
             default: 1,
@@ -40,21 +44,26 @@ const productSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        shipping: {
+            type: Boolean,
+            default: true,
+        },
         rating: {
             type: Number,
             default: 0,
         },
         company: {
             type: String,
-            enum: {
-                values: ["apple", "samsung", "dell", "mi"],
-                message: `{VALUE} is not supported`,
-            },
+            // enum: {
+            //     values: ["apple", "samsung", "dell", "mi", "nokia", "asus"],
+            //     message: `{VALUE} is not supported`,
+            // },
         },
         user: {
             type: mongoose.Schema.ObjectId,
             ref: "User",
             required: true,
+            // default: mongoose.Types.ObjectId('4edd40c86762e0fb12000003')
         }
     },
     { timestamps: true }

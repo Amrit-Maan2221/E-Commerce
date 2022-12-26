@@ -1,26 +1,29 @@
+import Navbar from "../components/Navbar";
+import { Outlet } from "react-router-dom";
+import SingleProduct from "../pages/product/SingleProduct";
+import Footer from "../components/Footer";
+
+const ECommerceLayout = () => {
+    return (
+        <>
+            <Navbar />
+            <Outlet />
+            <Footer />
+        </>
+    );
+};
+
+
 export const ECommerceRoutes = [
     {
-        path: "/register",
-        element: <Register />,
-    },
-    {
-        path: "/verify-email/:verificationString",
-        element: <EmailVerificationLandingPage />,
-    },
-    {
-        path: "/login",
-        element: <Login />,
-    },
-    {
-        path: "/verify-your-email",
-        element: <VerifyEmailPage />,
-    },
-    {
-        path: "/forgot-password",
-        element: <ForgotPasswordPage />,
-    },
-    {
-        path: "/reset-password/:passwordResetCode",
-        element: <PasswordResetLandingPage />,
+        path: "/",
+        element: <ECommerceLayout />,
+        children: [
+
+            {
+                path: "/singleproduct/:id",
+                element: <SingleProduct />,
+            }
+        ]
     }
 ];

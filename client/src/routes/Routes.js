@@ -3,9 +3,6 @@ import {
     Outlet
 } from "react-router-dom";
 
-
-import UserInfo from "../pages/UserInfo";
-import PrivateRoute from "../auth/PrivateRoute";
 import Test from "../pages/Test";
 import { AuthRoutes } from "./AuthRoutes";
 import Homepage from "../pages/Homepage";
@@ -13,6 +10,7 @@ import Contact from "../pages/Contact";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ErrorPage from "../pages/ErrorPage";
+import { ECommerceRoutes } from "./ECommerceRoutes";
 
 const Layout = () => {
     return (
@@ -46,6 +44,8 @@ const router = createBrowserRouter([
         ]
     },
     ...AuthRoutes
+    ,
+    ...ECommerceRoutes
     ,
     {
         path: "/test",

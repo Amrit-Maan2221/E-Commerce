@@ -1,10 +1,9 @@
-const { isAuthenticatedUser } = require("../middleware/auth");
 const Product = require("../models/ProductModel");
 const cloudinary = require("../util/cloudinary");
 const { catchAsyncErrors } = require("../util/error handling/catchAsyncErrors");
 
-exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
-  const { company, name, featured, sort, select } = req.query;
+exports.getAllProducts = async (req, res, next) => {
+  const { company, name, featured, sort, select, id} = req.query;
   const queryObject = {};
 
   if (company) {
@@ -19,27 +18,31 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
     queryObject.name = { $regex: name, $options: "i" };
   }
 
-  let apiData = await Product.find(queryObject);
+  if(id){
+    queryObject._id = id
+  }
+
+  let query = `Product.find(queryObject)`;
 
   if (sort) {
     let sortFix = sort.split(",").join(" ");
-    apiData = apiData.sort(sortFix);
+    query += `.sort(sortFix)`;
   }
 
   if (select) {
     let selectFix = select.split(",").join(" ");
-    apiData = apiData.select(selectFix);
+    query += `.select(selectFix)`;
   }
 
   let page = Number(req.query.page) || 1;
   let limit = Number(req.query.limit) || 10;
 
   let skip = (page - 1) * limit;
-  apiData = apiData.skip(skip).limit(limit);
+  query += `.skip(skip).limit(limit)`;
 
-  const Products = await apiData;
+  const Products = await eval(query);
   res.status(200).json({ Products, nbHits: Products.length });
-});
+};
 
 
 

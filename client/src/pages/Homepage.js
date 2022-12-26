@@ -1,4 +1,5 @@
 import React from 'react'
+import FeaturedProducts from '../components/FeaturedProducts'
 import HeroSection from '../components/HeroSection'
 import Services from '../components/Services'
 import Trusted from '../components/Trusted'
@@ -10,6 +11,7 @@ function Homepage() {
     }
   return (<>
      <HeroSection myData={heroData}/>
+     <FeaturedProducts/>
      <Services/>
      <Trusted/>
     </>

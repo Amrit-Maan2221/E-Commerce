@@ -14,7 +14,7 @@ const { uncaughtExceptionHanndler } = require("./src/util/error handling/uncaugh
 var bodyParser = require('body-parser');
 
 // Handling Uncaught Exception
-//uncaughtExceptionHanndler();
+uncaughtExceptionHanndler();
 
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
