@@ -14,7 +14,7 @@ const { uncaughtExceptionHanndler } = require("./src/util/error handling/uncaugh
 var bodyParser = require('body-parser');
 
 // Handling Uncaught Exception
-uncaughtExceptionHanndler();
+//uncaughtExceptionHanndler();
 
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
@@ -33,7 +33,6 @@ app.use(express.json());
 // Add all the routes to our Express server
 // exported from routes/index.js
 routes.forEach(route => {
-    console.log(route);
     app[route.method](route.path, route.handler);
 });
 
@@ -47,4 +46,4 @@ const server = app.listen(process.env.PORT || 4000, () => {
 
 
 
-unhandledRejectionHandler(server);
+//unhandledRejectionHandler(server);

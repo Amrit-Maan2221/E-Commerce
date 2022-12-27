@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { axoisInstance } from "../../util/ApiBaseUrlInstance";
 import { Featured_Product_Fail, Featured_Product_Request, Featured_Product_Success } from "./FeaturedProductSlice";
 import { Products_Fail, Product_Request, Product_Success } from "./ProductSlice";
@@ -9,7 +8,6 @@ import { All_Products_Fail, All_Product_Request, All_Product_Success } from "./P
 export const getAllProducts = async (dispatch, filter = {}, sort = "") => {
 
   dispatch(All_Product_Request());
-  console.log(sort);
 
   let query = "?";
   if (filter.keyword) {
@@ -35,13 +33,13 @@ export const getAllProducts = async (dispatch, filter = {}, sort = "") => {
     query += `price=${filter.price}&`
   }
 
-  if (sort == "lowest") {
+  if (sort === "lowest") {
     query += `sort=price&`
-  } else if (sort == "highest") {
+  } else if (sort === "highest") {
     query += `sort=-price&`
-  } else if (sort == "a-z") {
+  } else if (sort === "a-z") {
     query += `sort=price,name&`
-  } else if (sort == "z-a") {
+  } else if (sort === "z-a") {
     query += `sort=-price,-name&`
   }
 
@@ -53,7 +51,6 @@ export const getAllProducts = async (dispatch, filter = {}, sort = "") => {
       url: `/product/products${query}`
     };
     const res = await axoisInstance.request(options);
-    console.log(options)
 
     dispatch(All_Product_Success(res.data));
   } catch (err) {
@@ -69,7 +66,6 @@ export const getFeaturedProducts = async (dispatch) => {
       url: '/product/products?featured=true'
     };
     const res = await axoisInstance.request(options);
-    console.log(res);
     dispatch(Featured_Product_Success(res.data));
   } catch (err) {
     dispatch(Featured_Product_Fail(err));

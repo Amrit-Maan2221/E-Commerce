@@ -4,11 +4,14 @@ import { useUser } from '../auth/useUser';
 import { FiShoppingCart } from "react-icons/fi";
 import { CgMenu, CgClose } from "react-icons/cg";
 import "./styles/Navbar.scss"
+import { useSelector } from 'react-redux';
 
 function Navbar() {
     const user = useUser();
     const navigate = useNavigate();
     const [menuIcon, setMenuIcon] = useState();
+
+    const { total_item } = useSelector((state) => state.cart);
 
     const logOut = () => {
         localStorage.removeItem('token');
@@ -57,7 +60,7 @@ function Navbar() {
             </NavLink>
           </li>
 
-          {user && <p>{user.firstname}</p>}
+          {user && <NavLink to="/profile"><p>{user.firstname}</p></NavLink>}
 
           {user ? (
             <li>
@@ -74,7 +77,7 @@ function Navbar() {
           <li>
             <NavLink to="/cart" className="navbar-link cart-trolley--link">
               <FiShoppingCart className="cart-trolley" />
-              <span className="cart-total--item"> 10 </span>
+              <span className="cart-total--item"> {total_item} </span>
             </NavLink>
           </li>
         </ul>

@@ -1,9 +1,9 @@
 // variables & functions
 // @import 'functions';
-//@import './util/styles/variables';
+@import './util/styles/variables';
 
 // base & layout
-//@import './util/styles/breakpoints';
+@import './util/styles/breakpoints';
 //@import './util/styles/commonStyles';
 //@import './util/styles/base';
 // @import 'grid';
@@ -31,4 +31,272 @@
 //auth
 // @import './pages/auth/style/Auth.scss';
 
+
+
+
+/* reset styles */
+*,
+*::before,
+*::after {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	list-style: none;
+	text-decoration: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	font-family: "Work Sans", sans-serif;
+}
+
+html {
+	font-size: 62.5%;
+	overflow-x: hidden;
+}
+
+body #root {
+	width: 100vw;
+	height: 100vh;
+}
+
+
+body {
+	overflow-x: hidden;
+	scrollbar-color: rgb(98 84 243);
+	scrollbar-width: thin;
+
+	&::-webkit-scrollbar {
+		width: 1.5rem;
+
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: map-get($colors, "btn")
+	}
+
+	&::-webkit-scrollbar-thumb {
+
+		background: #fff;
+		border: 5px solid transparent;
+		border-radius: 9px;
+		background-clip: content-box;
+	}
+}
+
+h1,
+h2,
+h3,
+h4 {
+	font-family: "Work Sans", sans-serif;
+}
+
+
+
+h1 {
+	font-size: 6rem;
+	font-weight: 900;
+}
+
+h2 {
+	font-size: 4.4rem;
+	font-weight: 300;
+	white-space: normal;
+
+}
+
+h3 {
+	font-size: 1.8rem;
+	font-weight: 400;
+}
+
+p,
+button {
+	color: map-get($colors, "text");
+	font-size: 1.65rem;
+	line-height: 1.5;
+	font-weight: 400;
+}
+
+
+ul {
+	padding: 0;
+	list-style-type: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+hr {
+	border: 0;
+	border-top: 1px dotted #efefef;
+}
+
+.mt-2 {
+	margin-top: 2rem;
+}
+
+.container {
+	max-width: 110rem;
+	margin: 0 auto;
+}
+
+
+
+.grid {
+	display: grid;
+	gap: 9rem;
+}
+
+.grid-two-column {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-three-column {
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-four-column {
+	grid-template-columns: 1fr 1.2fr .5fr .8fr;
+}
+
+.grid-five-column {
+	grid-template-columns: repeat(5, 1fr);
+}
+
+
+
+.common-heading {
+	font-size: 3.8rem;
+	font-weight: 600;
+	margin-bottom: 6rem;
+	text-transform: capitalize;
+}
+
+.intro-data {
+	margin-bottom: 0;
+	text-transform: uppercase;
+	color: #5138ee;
+}
+
+
+
+
+.caption {
+	position: absolute;
+	top: 15%;
+	right: 10%;
+	text-transform: uppercase;
+	padding: 0.8rem 2rem;
+	font-size: 1.2rem;
+	border-radius: 2rem;
+	background-color: map-get($colors, "bg");
+	color: map-get($colors, "helper");
+}
+
+
+
+input,
+textarea {
+	max-width: 50rem;
+	padding: 1.6rem 2.4rem;
+	text-transform: uppercase;
+	color: map-get($colors, "black");
+	border: 1px solid map-get($colors, "border");
+	box-shadow: $shadowSupport;
+}
+
+
+
+input[type="submit"] {
+	max-width: 16rem;
+	margin-top: 2rem;
+	padding: 1.4rem 2.2rem;
+	border-style: solid;
+	border-width: .1rem;
+	text-transform: uppercase;
+	font-size: 1.8rem;
+	background-color: map-get($colors, "btn");
+	color: map-get($colors, "white");
+	cursor: pointer;
+}
+
+.btn {
+	text-decoration: none;
+	max-width: auto;
+	background-color: rgb(98 84 243);
+	color: rgb(255 255 255);
+	padding: 1.4rem 2.4rem;
+	border: none;
+	text-transform: uppercase;
+	text-align: center;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+
+	&:hover,
+	&:active {
+		box-shadow: 0 2rem 2rem 0 rgb(132 144 255 / 30%);
+		transform: scale(0.96);
+	}
+
+	a {
+		text-decoration: none;
+		color: rgb(255 255 255);
+		font-size: 1.8rem;
+	}
+}
+
+
+.cnt {
+	width: 100%;
+	padding: 0 12rem;
+}
+
+
+.msg-div {
+	display: grid;
+	place-items: center;
+	height: 50vh;
+	font-size: 4.2rem;
+	text-transform: capitalize;
+	font-weight: 300;
+}
+
+
+
+@include xl {
+	.container {
+		max-width: 85rem;
+	}
+}
+
+@include lg {
+	.container {
+		padding: 0 3.2rem;
+	}
+
+	html {
+		font-size: 50%;
+	}
+
+	.grid {
+		gap: 3.2rem;
+	}
+
+	.grid-two-column,
+	.grid-three-column,
+	.grid-four-column {
+		grid-template-columns: 1fr;
+	}
+
+	@include md {
+		.container {
+			padding: 0 3.2rem;
+		}
+	}
+
+}
 

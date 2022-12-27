@@ -53,8 +53,8 @@ const Sort = ({ gridView }) => {
             name="sort"
             id="sort"
             className="sort-selection--style"
-            onChange={(e) => setSorting(e.target.value)}>
-            <option value="" selected>Sort on Price</option>
+            onChange={(e) => setSorting(e.target.value)} value={sorting}>
+            <option value="">Sort on Price</option>
             <option value="#" disabled></option>
             <option value="lowest">Price(lowest)</option>
             <option value="#" disabled></option>

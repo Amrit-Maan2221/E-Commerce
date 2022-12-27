@@ -6,6 +6,7 @@ import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import Navbar from "../components/Navbar";
 import { Outlet } from "react-router-dom";
+import UserInfo from "../pages/auth/UserInfo";
 
 const AuthLayout = () => {
     return (
@@ -46,6 +47,10 @@ export const AuthRoutes = [
             {
                 path: "/reset-password/:passwordResetCode",
                 element: <PasswordResetLandingPage />,
+            },
+            {
+                path: "/profile",
+                element: <UserInfo />
             }
         ]
     }

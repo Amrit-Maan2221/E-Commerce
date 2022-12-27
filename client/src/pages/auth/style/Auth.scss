@@ -3,7 +3,6 @@
 // base & layout
 @import '../../../util/styles/breakpoints';
 @import '../../../util/styles/commonStyles';
-@import '../../../util/styles/base';
 
 
 #auth_container{
@@ -19,6 +18,17 @@
 	min-height: 100vh - 11.8495vh;;
     padding: 0 2rem;
 	margin: 0 auto;
+
+    .center{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .heading{
+        margin-bottom: 1rem;
+    }
 
     h1{
         font-size: 2rem;
@@ -91,7 +101,7 @@
         margin-bottom: 1.25rem;
     }
 
-    .input-field {
+    input {
         font-family: inherit;
         font-size: 1rem;
         font-weight: 400;

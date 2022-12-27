@@ -14,7 +14,7 @@ const ProductSlice = createSlice({
             state.error= false;
         },
         Product_Success: (state, action) => {
-            state.product = action.payload.Products[0];
+            state.product = action.payload.filteredProducts[0];
             state.loading = false
         },
         Products_Fail: (state, action) => {

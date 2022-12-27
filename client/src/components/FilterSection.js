@@ -14,8 +14,6 @@ function FilterSection() {
   const [color, setColor] =  useState(filter.color);
   const [price, setPrice] = useState(filter.price);
 
-  console.log(sort);
-
   function clearFilters(){
     setKeyword("");
     setCategory("all");

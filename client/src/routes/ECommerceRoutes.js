@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import SingleProduct from "../pages/product/SingleProduct";
 import Footer from "../components/Footer";
 import Products from "../pages/product/Products";
+import Cart from "../pages/cart/Cart";
 
 const ECommerceLayout = () => {
     return (
@@ -29,7 +30,10 @@ export const ECommerceRoutes = [
                 path: "/products",
                 element: <Products />,
             },
-
+            {
+                path: "/cart",
+                element: <Cart />,
+            },
         ]
     }
 ];

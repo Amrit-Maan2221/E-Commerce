@@ -92,7 +92,8 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
     jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
         if (err) return next(new ErrorHandler("Unable to update your details", 401));
 
-        const { _id, isVerified } = decoded;
+        const { user } = decoded;
+        const { _id, isVerified } = user;
         console.log(!isVerified)
         if (_id !== userId) return res.status(403).json({ message: 'Not allowed to update that user\'s data' });
         if (!isVerified) {

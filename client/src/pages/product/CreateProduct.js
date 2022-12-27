@@ -136,7 +136,6 @@ function CreateProduct() {
                                 name="avatar"
                                 accept="image/*"
                                 onChange={createProductImagesChange}
-                                multiple
                             />
                         </div>
 

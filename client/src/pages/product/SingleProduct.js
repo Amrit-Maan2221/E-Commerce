@@ -14,7 +14,7 @@ function SingleProduct() {
 
     const dispatch = useDispatch();
     const { id } = useParams();
-
+    console.log(id);
     const singleProduct = useSelector((state) => state.product);
     let { loading, error, product } = singleProduct;
 

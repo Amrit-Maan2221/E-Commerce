@@ -26,6 +26,8 @@ const AddToCart = ({ product }) => {
     dispatch(Add_to_Cart({_id, color, amount, product}));
   }
 
+  console.log('Product in Add to Cart Component is ', product)
+
 
   return (
     <section id="add-to-cart">
