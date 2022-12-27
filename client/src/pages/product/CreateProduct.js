@@ -14,13 +14,12 @@ function CreateProduct() {
     const [imagesPreview, setImagesPreview] = useState([]);
 
     const categories = [
-        "Laptop",
-        "Footwear",
-        "Bottom",
-        "Tops",
-        "Attire",
-        "Camera",
-        "SmartPhones",
+        "mobile",
+        "camera",
+        "computer",
+        "laptop",
+        "accessories",
+        "watch"
     ];
 
 

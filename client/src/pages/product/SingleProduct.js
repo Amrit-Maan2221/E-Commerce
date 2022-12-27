@@ -18,8 +18,6 @@ function SingleProduct() {
     const singleProduct = useSelector((state) => state.product);
     let { loading, error, product } = singleProduct;
 
-    console.log(product);
-
     useEffect(() => {
         loading = singleProduct.loading;
         error = singleProduct.error;

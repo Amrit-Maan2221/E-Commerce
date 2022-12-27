@@ -3,11 +3,15 @@ const cloudinary = require("../util/cloudinary");
 const { catchAsyncErrors } = require("../util/error handling/catchAsyncErrors");
 
 exports.getAllProducts = async (req, res, next) => {
-  const { company, name, featured, sort, select, id} = req.query;
+  const { company, category, name, featured, sort, price,select, color, id} = req.query;
   const queryObject = {};
 
   if (company) {
     queryObject.company = company;
+  }
+
+  if (category) {
+    queryObject.category = category;
   }
 
   if (featured) {
@@ -22,26 +26,38 @@ exports.getAllProducts = async (req, res, next) => {
     queryObject._id = id
   }
 
-  let query = `Product.find(queryObject)`;
+  if(color){
+    queryObject.colors = color
+  }
 
+  if(price && price > 0){
+    queryObject.price = {$gt :  Number(price), $lt : 100000};
+  }
+
+  let query = `Product.find(queryObject)`;
+  
   if (sort) {
-    let sortFix = sort.split(",").join(" ");
+    var sortFix = sort.split(",").join(" ");
     query += `.sort(sortFix)`;
   }
 
   if (select) {
-    let selectFix = select.split(",").join(" ");
+    var selectFix = select.split(",").join(" ");
     query += `.select(selectFix)`;
   }
 
-  let page = Number(req.query.page) || 1;
-  let limit = Number(req.query.limit) || 10;
 
-  let skip = (page - 1) * limit;
-  query += `.skip(skip).limit(limit)`;
+  
 
-  const Products = await eval(query);
-  res.status(200).json({ Products, nbHits: Products.length });
+  // let page = Number(req.query.page) || 1;
+  // let limit = Number(req.query.limit) || 10;
+
+  // let skip = (page - 1) * limit;
+  // query += `.skip(skip).limit(limit)`;
+
+  const filteredProducts = await eval(query);
+  const Products = await Product.find();
+  res.status(200).json({ Products, filteredProducts,nbHits: Products.length });
 };
 
 
@@ -80,3 +96,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
       product,
     });
   });
+
+
+
+  

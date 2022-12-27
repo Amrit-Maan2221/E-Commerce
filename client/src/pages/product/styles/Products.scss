@@ -1,0 +1,22 @@
+// variables & functions
+// @import 'functions';
+@import '../../../util/styles/variables';
+
+// base & layout
+@import '../../../util/styles/breakpoints';
+@import '../../../util/styles/commonStyles';
+@import '../../../util/styles/base';
+
+
+
+#products-data{
+    .grid-filter-column {
+        grid-template-columns: 0.2fr 1fr;
+      }
+    
+      @include lg {
+        .grid-filter-column {
+          grid-template-columns: 1fr;
+        }
+      }
+}

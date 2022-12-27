@@ -9,12 +9,13 @@ function Navbar() {
     const user = useUser();
     const navigate = useNavigate();
     const [menuIcon, setMenuIcon] = useState();
-    console.log(user)
 
     const logOut = () => {
         localStorage.removeItem('token');
         navigate('/login');
     }
+
+    
   return (
     <header id="MainNav">
         <NavLink to="/">
