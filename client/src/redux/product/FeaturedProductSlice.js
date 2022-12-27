@@ -15,7 +15,7 @@ const FeaturedProductSlice = createSlice({
         },
         Featured_Product_Success: (state, action) => {
             state.loading = false;
-            state.featuredProducts = action.payload.Products;
+            state.featuredProducts = action.payload.filteredProducts;
             state.error= false;
         },
         Featured_Product_Fail: (state, action) => {

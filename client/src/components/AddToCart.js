@@ -3,10 +3,12 @@ import { FaCheck } from "react-icons/fa";
 import CartAmountToggle from "./CartAmountToggle";
 import { NavLink } from "react-router-dom";
 import "./styles/AddToCart.scss"
+import { useDispatch } from "react-redux";
+import { Add_to_Cart } from "../redux/cart/CartSlice";
 
 const AddToCart = ({ product }) => {
-//   const { addToCart } = useCartContext();
-
+  //   const { addToCart } = useCartContext();
+  const dispatch = useDispatch();
   const { _id, colors, stock } = product;
 
   const [color, setColor] = useState(colors[0]);
@@ -19,6 +21,12 @@ const AddToCart = ({ product }) => {
   const setIncrease = () => {
     amount < stock ? setAmount(amount + 1) : setAmount(stock);
   };
+
+  function addToCart(_id, color, amount, product) {
+    dispatch(Add_to_Cart({_id, color, amount, product}));
+  }
+
+
   return (
     <section id="add-to-cart">
       <div className="colors">
@@ -45,8 +53,8 @@ const AddToCart = ({ product }) => {
         setIncrease={setIncrease}
       />
 
-      <NavLink to="/cart" 
-    //   onClick={() => addToCart(_id, color, amount, product)}
+      <NavLink to="/cart"
+        onClick={() => addToCart(_id, color, amount, product)}
       >
         <button className="btn">Add To Cart</button>
       </NavLink>
