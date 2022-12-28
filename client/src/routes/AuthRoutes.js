@@ -1,12 +1,13 @@
-import VerifyEmailPage from "../pages/auth/VerifyEmailPage";
-import EmailVerificationLandingPage from "../pages/auth/EmailVerificationLandingPage";
-import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage";
-import PasswordResetLandingPage from "../pages/auth/PasswordResetLandingPage";
-import Login from "../pages/auth/Login";
-import Register from "../pages/auth/Register";
-import Navbar from "../components/Navbar";
+import VerifyEmailPage from "../components/auth/VerifyEmailPage";
+import EmailVerificationLandingPage from "../components/auth/EmailVerificationLandingPage";
+import ForgotPasswordPage from "../components/auth/ForgotPasswordPage";
+import PasswordResetLandingPage from "../components/auth/PasswordResetLandingPage";
+import Login from "../components/auth/Login";
+import Register from "../components/auth/Register";
+import Navbar from "../components/common/Navbar";
 import { Outlet } from "react-router-dom";
-import UserInfo from "../pages/auth/UserInfo";
+import UserInfo from "../components/auth/UserInfo";
+import PrivateRoute from "../components/auth/PrivateRoute";
 
 const AuthLayout = () => {
     return (
@@ -50,7 +51,7 @@ export const AuthRoutes = [
             },
             {
                 path: "/profile",
-                element: <UserInfo />
+                element: <PrivateRoute><UserInfo /></PrivateRoute>
             }
         ]
     }

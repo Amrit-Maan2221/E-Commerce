@@ -1,0 +1,14 @@
+@import '../../../util/styles/common';
+
+
+#products-data{
+    .grid-filter-column {
+        grid-template-columns: 0.2fr 1fr;
+      }
+    
+      @include lg {
+        .grid-filter-column {
+          grid-template-columns: 1fr;
+        }
+      }
+}

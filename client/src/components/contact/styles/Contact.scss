@@ -1,0 +1,42 @@
+@import '../../../util/styles/common';
+
+.contact-section {
+    padding: 9rem 0 5rem 0;
+    text-align: center;
+
+    .container {
+        margin-top: 6rem;
+
+        .feedback{
+            @include centerContent();
+            height: 3rem;
+            margin-bottom: 2rem;
+            color: $helperColor;
+            font-size: 2rem;
+        }
+
+        .contact-form {
+            max-width: 50rem;
+            margin: auto;
+
+            .contact-inputs {
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+
+                input[type="submit"] {
+                    cursor: pointer;
+                    transition: all 0.2s;
+                    background-color: $btn;
+
+                    &:hover {
+                        background-color: $white;
+                        border: 1px solid $btn;
+                        color: $btn;
+                        transform: scale(0.9);
+                    }
+                }
+            }
+        }
+    }
+}

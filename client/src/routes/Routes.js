@@ -3,13 +3,13 @@ import {
     Outlet
 } from "react-router-dom";
 
-import Test from "../pages/Test";
+import Test from "../components/Test";
 import { AuthRoutes } from "./AuthRoutes";
-import Homepage from "../pages/Homepage";
-import Contact from "../pages/Contact";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import ErrorPage from "../pages/ErrorPage";
+import Homepage from "../components/home/Homepage";
+import Contact from "../components/contact/Contact";
+import Navbar from "../components/common/Navbar";
+import Footer from "../components/common/Footer";
+import ErrorPage from "../components/common/ErrorPage";
 import { ECommerceRoutes } from "./ECommerceRoutes";
 
 const Layout = () => {

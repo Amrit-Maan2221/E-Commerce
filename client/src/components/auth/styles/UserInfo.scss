@@ -1,0 +1,47 @@
+@import '../../../util/styles/common';
+
+#profile_container {
+    display: flex;
+
+    .profile_wrapper {
+        flex: 9;
+        padding: 20px;
+    }
+
+    .heading {
+        @include centerContent;
+        flex-direction: column;
+        margin-bottom: 2rem;
+    }
+
+    input{
+        margin-left: 5rem;
+    }
+
+    .fail {
+        color: red;
+    }
+
+    .profile_form {
+        display: flex;
+        flex-direction: column;
+        @include centerContent;
+    }
+
+    label {
+        font-size: 20px;
+        margin-top: 20px;
+    }
+
+    button {
+        width: 150px;
+        align-self: center;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        background-color: $btn;
+        padding: 10px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+}

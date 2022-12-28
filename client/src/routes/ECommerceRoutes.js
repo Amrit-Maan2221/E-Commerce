@@ -1,9 +1,9 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../components/common/Navbar";
 import { Outlet } from "react-router-dom";
-import SingleProduct from "../pages/product/SingleProduct";
-import Footer from "../components/Footer";
-import Products from "../pages/product/Products";
-import Cart from "../pages/cart/Cart";
+import SingleProduct from "../components/product/SingleProduct";
+import Footer from "../components/common/Footer";
+import Products from "../components/product/Products";
+import Cart from "../components/cart/Cart";
 
 const ECommerceLayout = () => {
     return (

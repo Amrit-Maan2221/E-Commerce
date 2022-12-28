@@ -1,9 +1,9 @@
 // variables & functions
 // @import 'functions';
-@import './util/styles/variables';
+// @import './util/styles/variables';
 
 // base & layout
-@import './util/styles/breakpoints';
+// @import './util/styles/breakpoints';
 //@import './util/styles/commonStyles';
 //@import './util/styles/base';
 // @import 'grid';
@@ -30,6 +30,14 @@
 
 //auth
 // @import './pages/auth/style/Auth.scss';
+
+
+
+
+
+
+
+@import './util/styles/common';
 
 
 
@@ -71,7 +79,7 @@ body {
 	}
 
 	&::-webkit-scrollbar-track {
-		background-color: map-get($colors, "btn")
+		background-color: $btn
 	}
 
 	&::-webkit-scrollbar-thumb {
@@ -111,7 +119,7 @@ h3 {
 
 p,
 button {
-	color: map-get($colors, "text");
+	color: $textColor;
 	font-size: 1.65rem;
 	line-height: 1.5;
 	font-weight: 400;
@@ -190,8 +198,8 @@ hr {
 	padding: 0.8rem 2rem;
 	font-size: 1.2rem;
 	border-radius: 2rem;
-	background-color: map-get($colors, "bg");
-	color: map-get($colors, "helper");
+	background-color: $bgColor;
+	color: $helperColor;
 }
 
 
@@ -201,8 +209,8 @@ textarea {
 	max-width: 50rem;
 	padding: 1.6rem 2.4rem;
 	text-transform: uppercase;
-	color: map-get($colors, "black");
-	border: 1px solid map-get($colors, "border");
+	color: $black;
+	border: 1px solid $borderColor;
 	box-shadow: $shadowSupport;
 }
 
@@ -216,8 +224,8 @@ input[type="submit"] {
 	border-width: .1rem;
 	text-transform: uppercase;
 	font-size: 1.8rem;
-	background-color: map-get($colors, "btn");
-	color: map-get($colors, "white");
+	background-color: $btn;
+	color: $white;
 	cursor: pointer;
 }
 
