@@ -4,7 +4,7 @@ dotenv.config();
 
 const express = require("express");
 const app = express();
-const connectDatabase = require("./dbConnection");
+const connectDatabase = require("./src/dbConnection");
 const cors = require("cors");
 const path = require("path");
 const routes = require('./src/routes');
@@ -14,7 +14,7 @@ const { uncaughtExceptionHanndler } = require("./src/util/error handling/uncaugh
 var bodyParser = require('body-parser');
 
 // Handling Uncaught Exception
-//uncaughtExceptionHanndler();
+uncaughtExceptionHanndler();
 
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
@@ -35,6 +35,10 @@ app.use(express.json());
 routes.forEach(route => {
     app[route.method](route.path, route.handler);
 });
+app.use(express.static(__dirname + '/public'));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname+'/public/home.html'));
+})
 
 // Middleware for error handler
 app.use(errorHandlerMiddleware);
@@ -46,4 +50,4 @@ const server = app.listen(process.env.PORT || 4000, () => {
 
 
 
-//unhandledRejectionHandler(server);
+unhandledRejectionHandler(server);

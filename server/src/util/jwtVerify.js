@@ -12,6 +12,7 @@ const sendToken = (user, statusCode, res) => {
             if (err) {
                 return res.status(500).json(err);
             }
+            console.log("THE TOKEN IS",  token)
             res.status(statusCode).json(token);
         }
     );
