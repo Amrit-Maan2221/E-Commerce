@@ -1,116 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>ECommerce API Docs</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>ECommerce API Docs</title>
 </head>
+
 <body>
-    <nav id="navbar">
-        <header>E-Commerce API</header>
+  <nav id="navbar">
+    <header>E-Commerce API</header>
+    <ul>
+      <li><a class="nav-link" href="#Introduction">Introduction</a></li>
+      <li>
+        <a class="nav-link" href="#Host_URL">Where the API is Hosted ?</a>
+      </li>
+      <li><a class="nav-link" href="#Example_Usage">Example Usage</a></li>
+      <li><a class="nav-link" href="#Auth">Auth Routes</a></li>
+      <li><a class="nav-link" href="#Product">Product Routes</a></li>
+      <li><a class="nav-link" href="#Contact">Contact Routes</a></li>
+      <li><a class="nav-link" href="#Reference">Reference</a></li>
+    </ul>
+  </nav>
+  <main id="main-doc">
+    <section class="main-section" id="Introduction">
+      <header>Introduction</header>
+      <article>
+        <p>
+          This is API Docs for a API E-Commerce Application. Here, you will find All the Endpoints in this API.
+        </p>
+      </article>
+    </section>
+    <section class="main-section" id="Host_URL">
+      <header>This is the URL where the API is hosted</header>
+      <article>
+        <p>The URL is:</p>
         <ul>
-          <li><a class="nav-link" href="#Introduction">Introduction</a></li>
           <li>
-            <a class="nav-link" href="#Host_URL"
-              >Where the API is Hosted ?</a
-            >
+            <a href="https://apus-ecommerce-api.onrender.com/">https://apus-ecommerce-api.onrender.com</a>
           </li>
-          <li><a class="nav-link" href="#Example_Usage">Example Usage</a></li>
-          <li><a class="nav-link" href="#Auth">Auth Routes</a></li>
-          <li><a class="nav-link" href="#Product">Product Routes</a></li>
-          <li><a class="nav-link" href="#Contact">Contact Routes</a></li>
-          <li><a class="nav-link" href="#Reference">Reference</a></li>
         </ul>
-      </nav>
-      <main id="main-doc">
-        <section class="main-section" id="Introduction">
-          <header>Introduction</header>
-          <article>
-            <p>
-              This is API Docs for a API E-Commerce Application. Here, you will find All the Endpoints in this API.
-            </p>
-          </article>
-        </section>
-        <section class="main-section" id="Host_URL">
-          <header>This is the URL where the API is hosted</header>
-          <article>
-            <p>The URL is:</p>
-            <ul>
-              <li>
-                <a href="https://apus-ecommerce-api.onrender.com/">https://apus-ecommerce-api.onrender.com</a>
-              </li>
-            </ul>
-          </article>
-        </section>
-        <section class="main-section" id="Example_Usage">
-          <header>Example Usage</header>
-          <article>
-            Below is the Simple Example how you can use this library to fetch all Products available in the database used in backend for this API:
-            <code> // Please Note: This Example Code uses axois Library and the Below code is in JavaScript
-                const res = await axios.get(https://apus-ecommerce-api.onrender.com//api/product/products);
+      </article>
+    </section>
+    <section class="main-section" id="Example_Usage">
+      <header>Example Usage</header>
+      <article>
+        Below is the Simple Example how you can use this library to fetch all Products available in the database used in
+        backend for this API:
+        <code> // Please Note: This Example Code uses axois Library and the Below code is in JavaScript
+                const res = await axios.get(https://apus-ecommerce-api.onrender.com/api/product/products);
             </code>
-            <b>Outcome:</b> res.data.products will give you all the products available in database
-          </article>
-        </section>
-        <section class="main-section" id="Auth">
-          <header>Auth Routes</header>
-          <ul>
-            <li>
-              <b>/api/signup:</b> Register the User
-            </li>
-            <li>
-                <b>/api/login:</b> Login the User
-            </li>
-            <li>
-                <b>/api/users/:userId:</b> Update the User
-            </li>
-            <li>
-                <b>/api/verify-email:</b> Verify the User Path Email. This path is automatically used during Registration
-            </li>
-            <li>
-                <b>/api/forgot-password/:email</b> Forget Password Email. Recieve Product Password Email to Update password if forgetten
-            </li>
-            <li>
-                <b>/api/users/:passwordResetCode/reset-password</b> Reset the password
-            </li>
-          </ul>
-        </section>
-        <section class="main-section" id="Product">
-            <header>Product Routes</header>
-            <ul>
-              <li>
-                <b>/api/product/products:</b> Get All Products. This End Support further query on the basic of URL query
-              </li>
-              <li>
-                  <b>/api/product/create:</b> Create a New Product only if you are logged in as Admin
-              </li>
-            </ul>
-          </section>
-          <section class="main-section" id="Contact">
-            <header>Contact Routes</header>
-            <ul>
-              <li>
-                <b>/api/contact:</b> Send the Owner that is me (Amrit) the query of Customer
-              </li>
-            </ul>
-          </section>
-        <section class="main-section" id="Reference">
-          <header>Github Link</header>
-          <article>
-            <ul>
-              <li>
-                Please click on the given link to view the Source Code in Github Repo
-                <a
-                  href="https://github.com/Amrit-Maan2221/E-Commerce/tree/main/server"
-                  target="_blank"
-                  >Github Link</a
-                >
-              </li>
-            </ul>
-          </article>
-        </section>
-      </main>      
+        <b>Outcome:</b> res.data.products will give you all the products available in database
+      </article>
+    </section>
+    <section class="main-section" id="Auth">
+      <header>Auth Routes</header>
+      <ul>
+        <li>
+          <b>/api/signup:</b> Register the User
+          <p>
+            A fetch Request for Register will look like:
+            <code>// Note: All the options in Body is Required i.e. firstname, lastname, email, username and password (8 characters or more)
+                  const options = {
+                  method: 'POST',
+                  body: '{"firstname":"John","lastname":"Smith","email":"test@gmail.com","username":"user name","password":"************"}'
+                };
+                
+                fetch('https://apus-ecommerce-api.onrender.com/api/signup', options)
+                  .then(response => response.json())
+                  .then(response => console.log(response))
+                  .catch(err => console.error(err));
+                </code>
+
+            Returns a JWT Token, which needs to be decoded.
+          </p>
+        </li>
+        <li>
+          <b>/api/login:</b> Login the User
+          <p>
+            A fetch Request for login will look like:
+            <code>// Note: All the options in Body is Required i.e. email and password (8 characters or more)
+                    const options = {method: 'POST', body: '{"email":"test@gmail.com","password":"**********"}'};
+
+                    fetch('https://apus-ecommerce-api.onrender.com/api/login', options)
+                      .then(response => response.json())
+                      .then(response => console.log(response))
+                      .catch(err => console.error(err));
+                  </code>
+
+            Returns a JWT Token, which needs to be decoded.
+          </p>
+        </li>
+        <li>
+          <b>/api/users/:userId:</b> Update the User
+          <p>
+            A fetch Request for Updating the User will look like:
+            <code>// Note: All the options in Body is Required i.e. email and password (8 characters or more)
+                    const options = { method: 'POST',
+                  headers: {Authorization: 'Bearer JWT_TOKEN_HERE', 'Content-Type': 'application/json'},
+                  body: '{"firstname":"test@gmail.com","lastname":"test@gmail.com","username":"test@gmail.com"}'
+                };
+                
+                fetch('https://apus-ecommerce-api.onrender.com/api/users/63a8cf12981d84d33d8bfcc2', options)
+                  .then(response => response.json())
+                  .then(response => console.log(response))
+                  .catch(err => console.error(err));
+                </code>
+          </p>
+        </li>
+        <li>
+          <b>/api/verify-email:</b> Verify the User Path Email. This path is automatically used during Registration
+          <p>
+            Example will look like
+            <code>// Note: The verificationString will come from the email received when registering the user
+          const options = {
+            method: 'PUT',
+            body: '{"verificationString":"8b45a65b-c624-4a93-8cf5-344e4321203d"}'
+          };
+          
+          fetch('https://apus-ecommerce-api.onrender.com/api/verify-email', options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
+            </code>
+          </p>
+        </li>
+        <li>
+          <b>/api/forgot-password/:email</b> Forget Password Email. Recieve Product Password Email to Update password if
+          forgetten
+        </li>
+        <li>
+          <b>/api/users/:passwordResetCode/reset-password</b> Reset the password
+        </li>
+      </ul>
+    </section>
+    <section class="main-section" id="Product">
+      <header>Product Routes</header>
+      <ul>
+        <li>
+          <b>/api/product/products:</b> Get All Products. This End Support further query on the basic of URL query
+
+          <p>
+            <strong>Request for Getting all the Products:</strong>
+            <code>const options = {method: 'GET'};
+
+                  fetch('https://apus-ecommerce-api.onrender.com', options)
+                    .then(response => response.json())
+                    .then(response => console.log(response))
+                    .catch(err => console.error(err));
+                  </code>
+          </p>
+        </li>
+        <li>
+          <b>/api/product/create:</b> Create a New Product only if you are logged in as Admin
+        </li>
+      </ul>
+    </section>
+    <section class="main-section" id="Contact">
+      <header>Contact Routes</header>
+      <ul>
+        <li>
+          <b>/api/contact:</b> Send the Owner that is me (Amrit) the query of Customer
+          <p>
+            Example using Fetch
+            <code>// Note: All the options shown in Body is Required
+                      const options = {
+                        method: 'POST',
+                        body: '{"email":"test@gmail.com","username":"John","userMessage":"Message Here."}'
+                      };
+                      
+                      fetch('https://apus-ecommerce-api.onrender.com/api/contact', options)
+                        .then(response => response.json())
+                        .then(response => console.log(response))
+                        .catch(err => console.error(err));
+                  </code>
+          </p>
+        </li>
+      </ul>
+    </section>
+    <section class="main-section" id="Reference">
+      <header>Github Link</header>
+      <article>
+        <ul>
+          <li>
+            Please click on the given link to view the Source Code in Github Repo
+            <a href="https://github.com/Amrit-Maan2221/E-Commerce/tree/main/server" target="_blank">Github Link</a>
+          </li>
+        </ul>
+      </article>
+    </section>
+  </main>
 </body>
+
 </html>
