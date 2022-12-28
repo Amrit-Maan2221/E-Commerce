@@ -4,14 +4,41 @@ import { useUser } from '../../auth/useUser';
 import CartItem from '../../components/CartItem';
 import { Cart_Item_Price_Total, ClearCart } from '../../redux/cart/CartSlice';
 import FormatPrice from '../../util/FormatPrice';
-import './styles/Cart.scss'
+import StripeCheckout from "react-stripe-checkout";
+import { useNavigate } from 'react-router-dom';
+import './styles/Cart.scss';
+import { useEffect, useState } from 'react';
+import { axoisInstance } from '../../util/ApiBaseUrlInstance';
 
 function Cart() {
+    const [stripeToken, setStripeToken] = useState(null);
     const user = useUser();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { cartItems, shippingInfo, total_price, total_item } = useSelector((state) => state.cart);
 
+
     dispatch(Cart_Item_Price_Total());
+
+    const onToken = (token) => {
+        setStripeToken(token);
+    };
+
+    useEffect(() => {
+        const makeRequest = async () => {
+            try {
+                const res = await axoisInstance.post("/stripe/payment", {
+                    tokenId: stripeToken.id,
+                    amount: (shippingInfo.shippingFee + total_price) / 100
+                });
+                console.log(res);
+                navigate("/success");
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        stripeToken && makeRequest();
+    }, [stripeToken]);
 
     return (
         <section id="cart">
@@ -53,31 +80,50 @@ function Cart() {
                         clear cart
                     </button>
                 </div>
-                
-                 {/* order total_amount */}
-                <div className="order-total--amount">
-                <div className="order-total--subdata">
-                    <div>
-                    <p>subtotal:</p>
-                    <p>
-                        <FormatPrice price={total_price} />
-                    </p>
+                {(total_price > 0) &&
+                    <div className="order-total--amount">
+                        <div className="order-total--subdata">
+                            <div>
+                                <p>subtotal:</p>
+                                <p>
+                                    <FormatPrice price={total_price} />
+                                </p>
+                            </div>
+                            <div>
+                                <p>shipping fee:</p>
+                                <p>
+                                    <FormatPrice price={shippingInfo.shippingFee} />
+                                </p>
+                            </div>
+                            <hr />
+                            <div>
+                                <p>order total:</p>
+                                <p>
+                                    <FormatPrice price={shippingInfo.shippingFee + total_price} />
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                    <p>shipping fee:</p>
-                    <p>
-                        <FormatPrice price={shippingInfo.shippingFee} />
-                    </p>
+                }
+                {(total_price > 0) &&
+                    <div className='btn-checkout'>
+                        <StripeCheckout
+                            name="Lama Shop"
+                            image="https://avatars.githubusercontent.com/u/1486366?v=4"
+                            billingAddress
+                            shippingAddress
+                            description={`Your total is ${(shippingInfo.shippingFee + total_price) / 100}`}
+                            amount={shippingInfo.shippingFee + total_price}
+                            token={onToken}
+                            stripeKey="pk_test_51MK2kjE0gaXUvxYfoI3ZkgHQdWQq9t1I4vlvgtu7NrFKcEgWdyRrNDA9CMnYbiFOjnV9c9Tqsrw8bceQq9xW6myL002aMKpc62"
+                        >
+                            <button className="btn" onClick={() => dispatch(ClearCart())}>
+                                Checkout
+                            </button>
+                        </StripeCheckout>
                     </div>
-                    <hr />
-                    <div>
-                    <p>order total:</p>
-                    <p>
-                        <FormatPrice price={shippingInfo.shippingFee + total_price} />
-                    </p>
-                    </div>
-                </div>
-                </div>
+                }
+
 
             </div>
         </section>

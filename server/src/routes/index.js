@@ -1,12 +1,13 @@
 const {authRoutes} = require('./auth');
 const {contactUsRoutes} = require('./contactUs');
+const { paymentRoutes } = require('./payment');
 const {productRoutes} = require('./product');
 
 const testRoute = {
     path: '/api/test',
     method: 'get',
     handler: [(req, res, next) => {
-        res.status(200).send('It works!');
+       console.log("First Handler")
         next();
     }, (req, res) => {
         res.status(200).send('Next Handler also works!');
@@ -15,6 +16,9 @@ const testRoute = {
 
 
 module.exports = [
-    ...authRoutes,...contactUsRoutes,
-     ...productRoutes,testRoute
+    ...authRoutes,
+    ...contactUsRoutes,
+    ...paymentRoutes,
+     ...productRoutes,
+     testRoute
 ];
