@@ -11,6 +11,7 @@ import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
 import ErrorPage from "../components/common/ErrorPage";
 import { ECommerceRoutes } from "./ECommerceRoutes";
+import { AdminRoutes } from "./AdminRoutes";
 
 const Layout = () => {
     return (
@@ -46,6 +47,8 @@ const router = createBrowserRouter([
     ...AuthRoutes
     ,
     ...ECommerceRoutes
+    ,
+    ...AdminRoutes
     ,
     {
         path: "/test",
