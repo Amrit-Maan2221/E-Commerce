@@ -76,9 +76,11 @@ function Cart() {
                     <NavLink to="/products">
                         <button className="btn"> continue Shopping </button>
                     </NavLink>
-                    <button className="btn btn-clear" onClick={() => dispatch(ClearCart())}>
-                        clear cart
-                    </button>
+                    {(total_price > 0) &&
+                        <button className="btn btn-clear" onClick={() => dispatch(ClearCart())}>
+                            clear cart
+                        </button>
+                    }
                 </div>
                 {(total_price > 0) &&
                     <div className="order-total--amount">
