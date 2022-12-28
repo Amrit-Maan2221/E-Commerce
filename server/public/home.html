@@ -65,7 +65,12 @@
             <code>// Note: All the options in Body is Required i.e. firstname, lastname, email, username and password (8 characters or more)
                   const options = {
                   method: 'POST',
-                  body: '{"firstname":"John","lastname":"Smith","email":"test@gmail.com","username":"user name","password":"************"}'
+                  body: '{
+"firstname":"John",
+"lastname":"Smith",
+"email":"test@gmail.com",
+"username":"user name",
+"password":"************"}'
                 };
                 
                 fetch('https://apus-ecommerce-api.onrender.com/api/signup', options)
@@ -82,7 +87,8 @@
           <p>
             A fetch Request for login will look like:
             <code>// Note: All the options in Body is Required i.e. email and password (8 characters or more)
-                    const options = {method: 'POST', body: '{"email":"test@gmail.com","password":"**********"}'};
+                    const options = {method: 'POST', body: '{"email":"test@gmail.com",
+"password":"**********"}'};
 
                     fetch('https://apus-ecommerce-api.onrender.com/api/login', options)
                       .then(response => response.json())
@@ -100,7 +106,10 @@
             <code>// Note: All the options in Body is Required i.e. email and password (8 characters or more)
                     const options = { method: 'POST',
                   headers: {Authorization: 'Bearer JWT_TOKEN_HERE', 'Content-Type': 'application/json'},
-                  body: '{"firstname":"test@gmail.com","lastname":"test@gmail.com","username":"test@gmail.com"}'
+                  body: '{
+"firstname":"test@gmail.com",
+"lastname":"test@gmail.com",
+"username":"test@gmail.com"}'
                 };
                 
                 fetch('https://apus-ecommerce-api.onrender.com/api/users/63a8cf12981d84d33d8bfcc2', options)
@@ -168,7 +177,10 @@
             <code>// Note: All the options shown in Body is Required
                       const options = {
                         method: 'POST',
-                        body: '{"email":"test@gmail.com","username":"John","userMessage":"Message Here."}'
+                        body: '{
+"email":"test@gmail.com",
+"username":"John",
+"userMessage":"Message Here."}'
                       };
                       
                       fetch('https://apus-ecommerce-api.onrender.com/api/contact', options)
