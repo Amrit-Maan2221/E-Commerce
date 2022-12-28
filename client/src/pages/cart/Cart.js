@@ -45,7 +45,7 @@ function Cart() {
             <div className="container">
                 {user && (
                     <div className="cart-user--profile">
-                        <img src={user.profile} alt={user.name} />
+                        <img src="https://images.unsplash.com/photo-1513789181297-6f2ec112c0bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1888&q=80" alt={user.name} />
                         <h2 className="cart-user--name">{user.firstname}</h2>
                     </div>
                 )}
@@ -109,7 +109,7 @@ function Cart() {
                     <div className='btn-checkout'>
                         <StripeCheckout
                             name="Lama Shop"
-                            image="https://avatars.githubusercontent.com/u/1486366?v=4"
+                            image="https://images.unsplash.com/photo-1513789181297-6f2ec112c0bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1888&q=80"
                             billingAddress
                             shippingAddress
                             description={`Your total is ${(shippingInfo.shippingFee + total_price) / 100}`}
