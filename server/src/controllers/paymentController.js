@@ -14,7 +14,7 @@ exports.paymentController = catchAsyncErrors(async (req, res, next) => {
         },
         (stripeErr, stripeRes) => {
           if (stripeErr) {
-            next(new ErrorHandler(err, 500));
+            next(new ErrorHandler(stripeErr, 500));
           } else {
             res.status(200).json(stripeRes);
           }

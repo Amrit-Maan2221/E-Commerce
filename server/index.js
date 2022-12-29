@@ -6,12 +6,7 @@ const express = require("express");
 const app = express();
 const connectDatabase = require("./src/dbConnection");
 const cors = require("cors");
-const corsOptions ={
-    origin:'*', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
+app.use(cors());
 
 const path = require("path");
 const routes = require('./src/routes');

@@ -29,9 +29,10 @@ function Cart() {
             try {
                 const res = await axoisInstance.post("/stripe/payment", {
                     tokenId: stripeToken.id,
-                    amount: (shippingInfo.shippingFee + total_price) / 100
+                    amount: shippingInfo.shippingFee + total_price
                 });
                 console.log(res);
+                dispatch(ClearCart())
                 navigate("/success");
             } catch (err) {
                 console.log(err);
