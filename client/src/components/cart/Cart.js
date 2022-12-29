@@ -66,7 +66,7 @@ function Cart() {
                         </div>
                         :
                         cartItems.map((curElem) => {
-                            return <CartItem key={curElem.id} {...curElem} />;
+                            return <CartItem key={curElem._id} {...curElem} />;
                         })
                     }
                 </div>
@@ -119,7 +119,7 @@ function Cart() {
                             token={onToken}
                             stripeKey="pk_test_51MK2kjE0gaXUvxYfoI3ZkgHQdWQq9t1I4vlvgtu7NrFKcEgWdyRrNDA9CMnYbiFOjnV9c9Tqsrw8bceQq9xW6myL002aMKpc62"
                         >
-                            <button className="btn" onClick={() => dispatch(ClearCart())}>
+                            <button className="btn">
                                 Checkout
                             </button>
                         </StripeCheckout>
