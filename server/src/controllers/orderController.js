@@ -1,6 +1,6 @@
 const { catchAsyncErrors } = require("../util/error handling/catchAsyncErrors");
 const ErrorHander = require("../util/error handling/Error Handler");
-const Order = require("../models/orderModel");
+const Order = require("../models/OrderModel");
 
 
 // Create new Order
