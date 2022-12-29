@@ -22,7 +22,11 @@ const orderSchema = new mongoose.Schema(
                 required: true,
             },
             postalCode: {
-                type: Number,
+                type: String,
+                required: true,
+            },
+            name: {
+                type: String,
                 required: true,
             }
         },
@@ -47,14 +51,18 @@ const orderSchema = new mongoose.Schema(
                 product: {
                     type: mongoose.Schema.ObjectId,
                     ref: "Product",
-                    required: true,
+                    required: true
+                },
+                image:{
+                    type: String,
+                    required: true
                 },
             },
         ],
-        user: {
+        userId: {
             type: mongoose.Schema.ObjectId,
             ref: "User",
-            required: false,
+            required: false
         },
         paymentInfo: {
             id: {
@@ -65,7 +73,7 @@ const orderSchema = new mongoose.Schema(
                 type: String,
                 required: true,
             },
-            recepit:{
+            recipt:{
                 type: String,
                 required: true
             }
@@ -73,6 +81,7 @@ const orderSchema = new mongoose.Schema(
         paidAt: {
             type: Date,
             required: true,
+            default: Date.now()
         },
         amount: {
             type: Number,

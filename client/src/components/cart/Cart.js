@@ -17,6 +17,11 @@ function Cart() {
     const navigate = useNavigate();
     const { cartItems, shippingInfo, total_price, total_item } = useSelector((state) => state.cart);
 
+    console.log(cartItems);
+    let userId;
+    if (user) {
+        userId = user._id;
+    }
 
     dispatch(Cart_Item_Price_Total());
 
@@ -32,10 +37,60 @@ function Cart() {
                     amount: shippingInfo.shippingFee + total_price
                 });
                 console.log(res);
-                dispatch(ClearCart())
+                let productsArray = [];
+                if (cartItems.length > 0) {
+                    cartItems.forEach(item => {
+                        let obj = {
+                            name: item.name,
+                            price: item.price,
+                            quantity: item.amount,
+                            color: item.color,
+                            product: item.id,
+                            image: item.image
+                        }
+                        
+                        productsArray.push(obj);
+                    });
+                }
+
+
+
+                const options = {
+                    method: 'POST',
+                    url: '/orders/create',
+                    data: {
+                        shippingInfo: {
+                            address: res.data.billing_details.address.line1,
+                            city: res.data.billing_details.address.city,
+                            state: res.data.billing_details.address.state,
+                            country: res.data.billing_details.address.country,
+                            postalCode: res.data.billing_details.address.postal_code,
+                            name: res.data.billing_details.name,
+                        },
+                        orderItems: productsArray,
+                        paymentInfo: {
+                            id: res.data.id,
+                            status: res.data.status,
+                            recipt: res.data.receipt_url
+                        },
+                        amount: res.data.amount,
+                        userId
+                    }
+                };
+
+                try{
+                    const createOrderResponse = await axoisInstance.request(options);
+                }  catch (err) {
+                    console.log(err);
+                    navigate("/failure");
+                    return;
+                }
+
+                dispatch(ClearCart());
                 navigate("/success");
             } catch (err) {
                 console.log(err);
+                navigate("/failure");
             }
         };
         stripeToken && makeRequest();

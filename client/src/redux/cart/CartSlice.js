@@ -53,6 +53,7 @@ const CartSlice = createSlice({
                 let cartProduct = {
                     _id: _id + color,
                     name: product.name,
+                    id: _id,
                     color,
                     amount,
                     image: product.images[0].url,

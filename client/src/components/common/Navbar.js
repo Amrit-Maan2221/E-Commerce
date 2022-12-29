@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useUser } from '../../custom hooks/useUser';
 import { FiShoppingCart } from "react-icons/fi";
@@ -10,14 +10,12 @@ function Navbar() {
     const user = useUser();
     const navigate = useNavigate();
     const [menuIcon, setMenuIcon] = useState();
-
-    const { total_item } = useSelector((state) => state.cart);
+    let { total_item } = useSelector((state) => state.cart);
 
     const logOut = () => {
         localStorage.removeItem('token');
         navigate('/login');
     }
-
     
   return (
     <header id="MainNav">
