@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+
+
 const orderSchema = new mongoose.Schema(
     {
         shippingInfo: {
@@ -15,19 +17,14 @@ const orderSchema = new mongoose.Schema(
                 type: String,
                 required: true,
             },
-
             country: {
                 type: String,
                 required: true,
             },
-            pinCode: {
+            postalCode: {
                 type: Number,
                 required: true,
-            },
-            phoneNo: {
-                type: Number,
-                required: true,
-            },
+            }
         },
         orderItems: [
             {
@@ -43,9 +40,9 @@ const orderSchema = new mongoose.Schema(
                     type: Number,
                     required: true,
                 },
-                image: {
+                color:{
                     type: String,
-                    required: true,
+                    required: true
                 },
                 product: {
                     type: mongoose.Schema.ObjectId,
@@ -57,7 +54,7 @@ const orderSchema = new mongoose.Schema(
         user: {
             type: mongoose.Schema.ObjectId,
             ref: "User",
-            required: true,
+            required: false,
         },
         paymentInfo: {
             id: {
@@ -68,27 +65,16 @@ const orderSchema = new mongoose.Schema(
                 type: String,
                 required: true,
             },
+            recepit:{
+                type: String,
+                required: true
+            }
         },
         paidAt: {
             type: Date,
             required: true,
         },
-        itemsPrice: {
-            type: Number,
-            required: true,
-            default: 0,
-        },
-        taxPrice: {
-            type: Number,
-            required: true,
-            default: 0,
-        },
-        shippingPrice: {
-            type: Number,
-            required: true,
-            default: 0,
-        },
-        totalPrice: {
+        amount: {
             type: Number,
             required: true,
             default: 0,
@@ -98,12 +84,9 @@ const orderSchema = new mongoose.Schema(
             required: true,
             default: "Processing",
         },
-        deliveredAt: Date,
-        createdAt: {
-            type: Date,
-            default: Date.now,
-        },
-    }
+        deliveredAt: Date
+    },
+    { timestamps: true }
 );
 
 module.exports = mongoose.model("Order", orderSchema);
