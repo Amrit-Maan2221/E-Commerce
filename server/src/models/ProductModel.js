@@ -53,11 +53,7 @@ const productSchema = new mongoose.Schema(
             default: 0,
         },
         company: {
-            type: String,
-            // enum: {
-            //     values: ["apple", "samsung", "dell", "mi", "nokia", "asus"],
-            //     message: `{VALUE} is not supported`,
-            // },
+            type: String
         },
         user: {
             type: mongoose.Schema.ObjectId,

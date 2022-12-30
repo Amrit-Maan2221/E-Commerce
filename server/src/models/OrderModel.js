@@ -92,6 +92,10 @@ const orderSchema = new mongoose.Schema(
             type: String,
             required: true,
             default: "Processing",
+            enum: {
+                values: ["Processing", "Complete", "Declined"],
+                message: `{VALUE} is not supported`,
+            },
         },
         deliveredAt: Date
     },

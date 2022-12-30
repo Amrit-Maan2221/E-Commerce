@@ -13,46 +13,51 @@ import {
   WorkOutline,
   Report,
 } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 export default function Sidebar() {
+
+      const location = useLocation();
+      const { pathname } = location;
+      const splitLocation = pathname.split("/");
+      console.log(splitLocation)
   return (
     <div className="sidebar admin">
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
-            <Link to="/" className="link">
-            <li className="sidebarListItem active">
-              <LineStyle className="sidebarIcon" />
-              Home
-            </li>
-            </Link>
-            <li className="sidebarListItem">
+            <NavLink to="/admin" className="link">
+              <li className={splitLocation[1] === "admin" && !splitLocation[2] ? "active sidebarListItem" : "sidebarListItem"}>
+                <LineStyle className="sidebarIcon" />
+                Home
+              </li>
+            </NavLink>
+            {/* <li className="sidebarListItem">
               <Timeline className="sidebarIcon" />
               Analytics
             </li>
             <li className="sidebarListItem">
               <TrendingUp className="sidebarIcon" />
               Sales
-            </li>
+            </li> */}
           </ul>
         </div>
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
-            <Link to="/users" className="link">
-              <li className="sidebarListItem">
+            <NavLink to="/admin/users" className="link">
+            <li className={splitLocation[2] === "users" ? "active sidebarListItem" : "sidebarListItem"}>
                 <PermIdentity className="sidebarIcon" />
                 Users
               </li>
-            </Link>
-            <Link to="/products" className="link">
+            </NavLink>
+            <NavLink to="/products" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
                 Products
               </li>
-            </Link>
+            </NavLink>
             <li className="sidebarListItem">
               <AttachMoney className="sidebarIcon" />
               Transactions

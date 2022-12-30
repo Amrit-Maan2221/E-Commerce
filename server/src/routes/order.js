@@ -1,4 +1,4 @@
-const { createOrderController } = require("../controllers/orderController")
+const { createOrderController, getMonthlyIncomeController, getAllOrdersController } = require("../controllers/orderController")
 
 
 
@@ -11,5 +11,19 @@ const createOrderRoute = {
 }
 
 
+const getAllOrdersRoute = {
+    path: '/api/orders',
+    method: 'get',
+    handler: getAllOrdersController
+}
 
-exports.orderRoutes = [createOrderRoute]
+
+const getMonthlyIncomeRoute = {
+    path: '/api/orders/income',
+    method: 'get',
+    handler: getMonthlyIncomeController
+}
+
+
+
+exports.orderRoutes = [createOrderRoute, getMonthlyIncomeRoute, getAllOrdersRoute]

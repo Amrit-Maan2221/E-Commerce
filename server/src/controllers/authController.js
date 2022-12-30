@@ -118,46 +118,46 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
 
 
 // Verify Email
-exports.verifyEmailController =  catchAsyncErrors(async (req, res, next) => {
+exports.verifyEmailController = catchAsyncErrors(async (req, res, next) => {
     if (!req.body.verificationString) {
         return next(new ErrorHandler("The verification code cannot be found", 401));
     }
-        const result = await User.findOne({
-            verificationString: req.body.verificationString
-        });
-        if (!result) return next(new ErrorHandler("Unable to verify Verification code", 401));
+    const result = await User.findOne({
+        verificationString: req.body.verificationString
+    });
+    if (!result) return next(new ErrorHandler("Unable to verify Verification code", 401));
 
-        await User.updateOne({ _id: result._id }, {
-            $set: { isVerified: true }
-        });
-        const { password, verificationString, ...userDetails } = result._doc;
-        userDetails.isVerified = true;
-        sendToken(userDetails, 200, res);
+    await User.updateOne({ _id: result._id }, {
+        $set: { isVerified: true }
+    });
+    const { password, verificationString, ...userDetails } = result._doc;
+    userDetails.isVerified = true;
+    sendToken(userDetails, 200, res);
 });
 
 
 // send reset password
-exports.sendResetPasswordLinkController =  catchAsyncErrors(async (req, res, next) => {
+exports.sendResetPasswordLinkController = catchAsyncErrors(async (req, res, next) => {
     const { email } = req.params;
     const passwordResetCode = uuid();
-        const result = await User.updateOne({ email }, { $set: { passwordResetCode } });
-        if (result.modifiedCount > 0) {
-            try {
-                await sendEmail({
-                    to: email,
-                    from: process.env.EMAIL_FROM,
-                    subject: 'Password Reset',
-                    text: `
+    const result = await User.updateOne({ email }, { $set: { passwordResetCode } });
+    if (result.modifiedCount > 0) {
+        try {
+            await sendEmail({
+                to: email,
+                from: process.env.EMAIL_FROM,
+                subject: 'Password Reset',
+                text: `
                         To reset your password, click this link:
                         ${process.env.FRONTEND_URL}}/reset-password/${passwordResetCode}
                     `
-                });
-            } catch (e) {
-                next(new ErrorHandler());
-            }
+            });
+        } catch (e) {
+            next(new ErrorHandler());
         }
+    }
 
-        res.sendStatus(200);
+    res.sendStatus(200);
 });
 
 
@@ -165,7 +165,7 @@ exports.sendResetPasswordLinkController =  catchAsyncErrors(async (req, res, nex
 
 
 // reset password
-exports.resetPasswordController =  catchAsyncErrors(async (req, res, next) => {
+exports.resetPasswordController = catchAsyncErrors(async (req, res, next) => {
     const { passwordResetCode } = req.params;
     if (!req.body.newPassword) {
         return next(new ErrorHandler("Please provide your new passsword", 401));
@@ -191,6 +191,41 @@ exports.resetPasswordController =  catchAsyncErrors(async (req, res, next) => {
     res.sendStatus(200);
 });
 
+
+
+//GET ALL USER
+exports.getAllUserController = catchAsyncErrors(async (req, res) => {
+    const query = req.query.new;
+    const users = query
+        ? await User.find().sort({ _id: -1 }).limit(5)
+        : await User.find();
+    res.status(200).json(users);
+});
+
+
+
+
+//GET USER STATS
+exports.getUserStatsController = catchAsyncErrors(async (req, res, next) => {
+    const date = new Date();
+    const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+
+    const data = await User.aggregate([
+        { $match: { createdAt: { $gte: lastYear } } },
+        {
+            $project: {
+                month: { $month: "$createdAt" },
+            },
+        },
+        {
+            $group: {
+                _id: "$month",
+                total: { $sum: 1 },
+            },
+        },
+    ]);
+    res.status(200).json(data)
+});
 
 
 

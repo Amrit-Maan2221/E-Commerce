@@ -1,4 +1,4 @@
-const {registerUser, loginUser, updateUser, verifyEmailController, sendResetPasswordLinkController, resetPasswordController} = require("../controllers/authController");
+const {registerUser, loginUser, updateUser, verifyEmailController, sendResetPasswordLinkController, resetPasswordController, getUserStatsController, getAllUserController} = require("../controllers/authController");
 
 
 //REGISTER
@@ -50,6 +50,21 @@ const resetPasswordRoute = {
 }
 
 
+const userStatsRoute = {
+    path: '/api/users/stats',
+    method: 'get',
+    handler: getUserStatsController
+}
 
 
-exports.authRoutes = [signUpRoute, logInRoute, updateUserInfoRoute, verifyEmailRoute, forgotPasswordRoute, resetPasswordRoute]
+const getAllUsersRoute = {
+    path: '/api/users',
+    method: 'get',
+    handler: getAllUserController
+}
+
+
+
+
+
+exports.authRoutes = [signUpRoute, logInRoute, updateUserInfoRoute, verifyEmailRoute, forgotPasswordRoute, getAllUsersRoute, userStatsRoute, resetPasswordRoute]
