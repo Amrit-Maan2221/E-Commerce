@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { axoisInstance } from '../../util/ApiBaseUrlInstance';
 import { useToken } from '../auth/useToken';
 import './styles/CreateProduct.scss'
 
@@ -41,7 +41,7 @@ function CreateProduct() {
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
         };
         try {
-            const { data } = await axios.post(
+            const { data } = await axoisInstance.post(
                 `http://localhost:5001/api/product/create`,
                 myForm,
                 config
@@ -90,6 +90,7 @@ function CreateProduct() {
                                 onChange={(e) => setName(e.target.value)}
                             />
                         </div>
+
                         <div>
                             <input
                                 type="number"
@@ -100,7 +101,6 @@ function CreateProduct() {
                         </div>
 
                         <div>
-
                             <textarea
                                 placeholder="Product Description"
                                 value={description}

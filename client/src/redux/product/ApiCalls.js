@@ -1,6 +1,6 @@
 import { axoisInstance } from "../../util/ApiBaseUrlInstance";
 import { Featured_Product_Fail, Featured_Product_Request, Featured_Product_Success } from "./FeaturedProductSlice";
-import { Products_Fail, Product_Request, Product_Success } from "./ProductSlice";
+import { Product_Delete_Fail, Product_Delete_Request, Product_Delete_Success, Product_Fail, Product_Request, Product_Success, Product_Update_Fail, Product_Update_Request, Product_Update_Success } from "./ProductSlice";
 import { All_Products_Fail, All_Product_Request, All_Product_Success } from "./ProductsSlice";
 
 
@@ -43,8 +43,6 @@ export const getAllProducts = async (dispatch, filter = {}, sort = "") => {
     query += `sort=-price,-name&`
   }
 
-
-
   try {
     const options = {
       method: 'GET',
@@ -83,6 +81,41 @@ export const getSingleProduct = async (dispatch, id) => {
     const res = await axoisInstance.request(options);
     dispatch(Product_Success(res.data));
   } catch (err) {
-    dispatch(Products_Fail(err));
+    dispatch(Product_Fail(err));
+  }
+};
+
+
+
+export const updateProduct = async (dispatch, id, token, formData) => {
+  dispatch(Product_Update_Request);
+  
+  try {
+    const options = {
+      method: 'PUT',
+      url: `http://localhost:5001/api/product/update/${id}`,
+      headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`},
+      data: formData
+    };
+    const res = await axoisInstance.request(options);
+    console.log(res.data)
+    dispatch(Product_Update_Success(res.data));
+  } catch (err) {
+    dispatch(Product_Update_Fail(err));
+  }
+};
+
+
+export const deleteProduct = async (dispatch, id) => {
+  dispatch(Product_Delete_Request());
+  try {
+    const options = {
+      method: 'delete',
+      url: `/product/delete/${id}`
+    };
+    const res = await axoisInstance.request(options);
+    dispatch(Product_Delete_Success());
+  } catch (err) {
+    dispatch(Product_Delete_Fail(err));
   }
 };

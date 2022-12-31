@@ -20,7 +20,6 @@ export default function Sidebar() {
       const location = useLocation();
       const { pathname } = location;
       const splitLocation = pathname.split("/");
-      console.log(splitLocation)
   return (
     <div className="sidebar admin">
       <div className="sidebarWrapper">
@@ -52,8 +51,8 @@ export default function Sidebar() {
                 Users
               </li>
             </NavLink>
-            <NavLink to="/products" className="link">
-              <li className="sidebarListItem">
+            <NavLink to="/admin/products" className="link">
+              <li className={splitLocation[2] === "products" ? "active sidebarListItem" : "sidebarListItem"}>
                 <Storefront className="sidebarIcon" />
                 Products
               </li>

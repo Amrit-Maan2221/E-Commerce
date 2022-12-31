@@ -59,7 +59,7 @@ const productSchema = new mongoose.Schema(
             type: mongoose.Schema.ObjectId,
             ref: "User",
             required: true,
-            // default: mongoose.Types.ObjectId('4edd40c86762e0fb12000003')
+            //default: mongoose.Types.ObjectId('4edd40c86762e0fb12000003')
         }
     },
     { timestamps: true }

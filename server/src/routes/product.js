@@ -1,4 +1,4 @@
-const { getAllProducts, createProduct } = require("../controllers/productController");
+const { getAllProducts, createProduct, deleteProductController, updateProductController } = require("../controllers/productController");
 const { isAuthenticatedUser } = require("../middleware/auth");
 
 
@@ -18,5 +18,20 @@ const createProductRoute = {
 }
 
 
+// Delete product - Admin
+const deleteProductRoute = {
+    path: '/api/product/delete/:id',
+    method: 'delete',
+    handler: deleteProductController
+}
 
-exports.productRoutes = [getAllProductRoute, createProductRoute]
+// Update product - Admin
+const updateProductRoute = {
+    path: '/api/product/update/:id',
+    method: 'put',
+    handler: updateProductController
+}
+
+
+
+exports.productRoutes = [getAllProductRoute, createProductRoute, deleteProductRoute, updateProductRoute]

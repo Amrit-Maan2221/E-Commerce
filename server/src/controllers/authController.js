@@ -193,7 +193,7 @@ exports.resetPasswordController = catchAsyncErrors(async (req, res, next) => {
 
 
 
-//GET ALL USER
+//GET ALL USER - ADMIN
 exports.getAllUserController = catchAsyncErrors(async (req, res) => {
     const query = req.query.new;
     const users = query
@@ -203,9 +203,17 @@ exports.getAllUserController = catchAsyncErrors(async (req, res) => {
 });
 
 
+// Delete a user - ADMIN or the User himself
+exports.deleteUserController = catchAsyncErrors(async (req, res) => {
+  console.log("Trying to Delete a User");
+  await User.findByIdAndDelete(req.params.id);
+  res.status(200).json("Product has been deleted...");
+});
 
 
-//GET USER STATS
+
+
+//GET USER STATS -- ADMIN
 exports.getUserStatsController = catchAsyncErrors(async (req, res, next) => {
     const date = new Date();
     const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));

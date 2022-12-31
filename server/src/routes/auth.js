@@ -1,4 +1,4 @@
-const {registerUser, loginUser, updateUser, verifyEmailController, sendResetPasswordLinkController, resetPasswordController, getUserStatsController, getAllUserController} = require("../controllers/authController");
+const {registerUser, loginUser, updateUser, verifyEmailController, sendResetPasswordLinkController, resetPasswordController, getUserStatsController, getAllUserController, deleteUserController} = require("../controllers/authController");
 
 
 //REGISTER
@@ -64,7 +64,14 @@ const getAllUsersRoute = {
 }
 
 
+const deleteUserRoute = {
+    path: '/api/users/delete/:id',
+    method: 'delete',
+    handler: deleteUserController
+}
 
 
 
-exports.authRoutes = [signUpRoute, logInRoute, updateUserInfoRoute, verifyEmailRoute, forgotPasswordRoute, getAllUsersRoute, userStatsRoute, resetPasswordRoute]
+
+
+exports.authRoutes = [signUpRoute, logInRoute, updateUserInfoRoute, verifyEmailRoute, forgotPasswordRoute, deleteUserRoute,getAllUsersRoute, userStatsRoute, resetPasswordRoute]
