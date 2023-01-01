@@ -93,7 +93,7 @@ export const updateProduct = async (dispatch, id, token, formData) => {
   try {
     const options = {
       method: 'PUT',
-      url: `http://localhost:5001/api/product/update/${id}`,
+      url: `/api/product/update/${id}`,
       headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`},
       data: formData
     };
