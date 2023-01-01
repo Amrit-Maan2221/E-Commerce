@@ -1,106 +1,55 @@
-.navigation-menu {
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
+.hero {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: #003366;
+  height: 600px;
+  background-color: #000;
   color: #fff;
+  padding: 0 40px;
+  opacity: 0;
+  transition: all 0.5s;
 }
 
-.navigation-menu-logo {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.5rem;
+.hero-fade-in {
+  opacity: 1;
 }
 
-.navigation-menu-toggle {
-  display: none;
-  background-color: #333;
-  border: none;
-  color: #fff;
-  font-size: 1rem;
+.hero-description {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.hero-button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
+  transition: all 0.3s;
 }
 
-.navigation-menu-items {
-  display: flex;
-}
-
-.navigation-menu-item {
-  list-style: none;
-  margin-left: 1rem;
-  padding: 0.5rem;
-}
-
-.navigation-menu-link {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.2rem;
-}
-
-.navigation-menu-buttons {
-  display: flex;
-}
-
-.navigation-menu-button {
-  margin-left: 1rem;
+.hero-button:hover {
   background-color: #fff;
-  border: none;
-  color: #333;
-  font-size: 1rem;
-  cursor: pointer;
+  color: #000;
 }
 
-.navigation-menu-cart {
-  display: flex;
-  align-items: center;
-  color: #333;
-  text-decoration: none;
-  font-size: 1.5rem;
-  cursor: pointer;
+.hero-image {
+  width: 50%;
 }
 
-@media (max-width: 768px) {
-  .navigation-menu {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+.hero-image img {
+  width: 100%;
+  height: auto;
+}
 
-  .navigation-menu-toggle {
-    display: block;
-  }
+.hero-content {
+  max-width: 500px;
+  margin-right: 40px;
+}
 
-  .navigation-menu-items {
-    flex-direction: column;
-    margin-bottom: 1rem;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: #003366;
-    color: #fff;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .navigation-menu-items.open {
-    transform: translateY(0);
-  }
-
-  .navigation-menu-item {
-    margin: 0;
-    text-align: left;
-  }
-
-  .navigation-menu-buttons {
-    margin-left: 0;
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-  }
+.hero-title {
+  font-size: 48px;
+  font-weight: bold;
 }

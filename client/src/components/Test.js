@@ -1,41 +1,26 @@
-import React, { useState } from 'react';
-import { FaShoppingCart } from 'react-icons/fa';
-import'./Test.scss';
+import React, { useEffect } from 'react';
+import './Test.scss';
 
-function NavigationMenu() {
-  const [menuOpen, setMenuOpen] = useState(false);
+function Hero() {
+  useEffect(() => {
+    const hero = document.querySelector('.hero');
+    hero.classList.add('hero-fade-in');
+  }, []);
 
   return (
-    <nav className="navigation-menu">
-      <a href="#" className="navigation-menu-logo">Logo</a>
-      <button
-        className="navigation-menu-toggle"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-        Menu
-      </button>
-      <ul className={`navigation-menu-items ${menuOpen ? 'open' : ''}`}>
-        <li className="navigation-menu-item">
-          <a href="#" className="navigation-menu-link">Home</a>
-        </li>
-        <li className="navigation-menu-item">
-          <a href="#" className="navigation-menu-link">Shop</a>
-        </li>
-        <li className="navigation-menu-item">
-          <a href="#" className="navigation-menu-link">About</a>
-        </li>
-        <li className="navigation-menu-item">
-          <a href="#" className="navigation-menu-link">Contact</a>
-        </li>
-      </ul>
-      <div className="navigation-menu-buttons">
-        <button className="navigation-menu-button">Login</button>
-        <a href="#" className="navigation-menu-cart">
-          <FaShoppingCart />
-        </a>
+    <section className="hero">
+      <div className="hero-content">
+        <h1 className="hero-title">Introducing the new iPhone</h1>
+        <p className="hero-description">
+          The most powerful and advanced iPhone ever.
+        </p>
+        <button className="hero-button">Learn more</button>
       </div>
-    </nav>
+      <div className="hero-image">
+        <img src="/images/iphone.png" alt="iPhone" />
+      </div>
+    </section>
   );
 }
 
-export default NavigationMenu;
+export default Hero;
