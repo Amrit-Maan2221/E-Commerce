@@ -36,34 +36,28 @@ function Product() {
     const [images, setImages] = useState([]);
     const [featured, setFeatured] = useState(product.featured || false);
 
-
     useEffect(() => {
         getSingleProduct(dispatch, id);
+        setFeatured(product.featured);
+    }, [dispatch, id]);
 
-        loading = singleProduct.loading;
-        error = singleProduct.error;
-        product = singleProduct.product;
-
+    useEffect(() => {
         const getStats = async () => {
             try {
-                const res = await axoisInstance.get("orders/income?pid=" + id);
-                const list = res.data.sort((a, b) => {
-                    return a._id - b._id
-                })
-                list.map((item) =>
-                    setPStats((prev) => [
-                        ...prev,
-                        { name: MONTHS[item._id - 1], Sales: item.total },
-                    ])
+                const res = await axiosInstance.get(`orders/income?pid=${id}`);
+                const list = res.data.sort((a, b) => a._id - b._id);
+                setPStats(
+                    list.map((item) => ({
+                        name: MONTHS[item._id - 1],
+                        Sales: item.total,
+                    }))
                 );
             } catch (err) {
                 console.log(err);
             }
         };
         getStats();
-
-
-    }, [dispatch, id, MONTHS]);
+    }, [id, MONTHS]);
 
     const createProductImagesChange = (e) => {
         const files = Array.from(e.target.files);
@@ -83,24 +77,25 @@ function Product() {
         });
     };
 
-    
+
     const updateProductSubmitHandler = async (e) => {
         e.preventDefault();
         let data = {};
 
-        if(e.target.name.value){data.name = e.target.name.value;}
-        if(e.target.price.value){data.price = e.target.price.value;}
-        if(e.target.description.value){data.description = e.target.description.value;}
-        if(e.target.category.value){data.category = e.target.category.value;}
-        if(e.target.stock.value){data.stock = e.target.stock.value;}
-        if(e.target.company.value){data.company = e.target.company.value;}
-        if(images.length){data.images = images;}
+        if (e.target.name.value) { data.name = e.target.name.value; }
+        if (e.target.price.value) { data.price = e.target.price.value; }
+        if (e.target.description.value) { data.description = e.target.description.value; }
+        if (e.target.category.value) { data.category = e.target.category.value; }
+        if (e.target.stock.value) { data.stock = e.target.stock.value; }
+        if (e.target.company.value) { data.company = e.target.company.value; }
+        if (images.length) { data.images = images; }
         data.featured = featured;
         updateProduct(dispatch, id, token, data);
     };
 
 
-    if (loading || error) return (<div className='product admin'><Loader /></div>);
+    if (loading) return (<div className='product admin'><Loader /></div>);
+    if (error) return (<div className='product admin'>Error while loading product</div>);
     return (
         <div className="product admin">
             <div className="productTitleContainer">
@@ -165,36 +160,69 @@ function Product() {
             </div>
             <div className="productBottom">
                 <form className="productForm" encType="multipart/form-data"
-                onSubmit={updateProductSubmitHandler}
+                    onSubmit={updateProductSubmitHandler}
                 >
                     <div className="productFormLeft">
-                        <label htmlFor='name'>Product Name</label>
-                        <input type="text" id="name" name="name" placeholder={product.name} />
+                        <label htmlFor="name">
+                            Name:
+                            <input
+                                name="name"
+                                id="name"
+                                type="text"
+                                defaultValue={product.name}
+                            />
+                        </label>
+                        <label htmlFor="price">
+                            Price:
+                            <input
+                                name="price"
+                                id="price"
+                                type="number"
+                                defaultValue={product.price}
+                            />
+                        </label>
+                        <label htmlFor="description">
+                            Description:
+                            <textarea
+                                name="description"
+                                id="description"
+                                defaultValue={product.description}
+                            />
+                        </label>
+                        <label htmlFor="category">
+                            Category:
+                            <input
+                                name="category"
+                                id="category"
+                                type="text"
+                                defaultValue={product.category}
+                            />
+                        </label>
+                        <label htmlFor="stock">
+                            Stock:
+                            <input
+                                name="stock"
+                                id="stock"
+                                type="number"
+                                defaultValue={product.stock}
+                            />
+                        </label>
+                        <label htmlFor="company">
+                            Company:
+                            <input
+                                name="company"
+                                id="company"
+                                type="text"
+                                defaultValue={product.company}
+                            />
+                        </label>
 
-                        <label htmlFor='description'>Product Description</label>
-                        <textarea type="text" name="description"  id="description" placeholder={product.description} />
-
-                        <label htmlFor='price'>Price</label>
-                        <input type="text" id='price' name="price" placeholder={product.price}/>
-
-                        <label htmlFor='category'>Category</label>
-                        <input type="text" id='category' name="category" placeholder={product.category} />
-
-                        <label htmlFor='company'>Company</label>
-                        <input type="text" id='company' name="company" placeholder={product.company}/>
-
-
-                        <label htmlFor='stock'>Stock</label>
-                        <input id='stock' name="stock"
-                            type="number"
-                            placeholder={product.stock}
-                        />
 
                         <label htmlFor='featured'>
                             <input name='featured' id='featured'
                                 type="checkbox"
                                 checked={featured}
-                                onChange={()=> setFeatured(!featured)}
+                                onChange={() => setFeatured(!featured)}
                             />
                             Featured {product.featured && <span className='productFeaturedText'>(Currently Featured)</span>}
                         </label>
