@@ -44,7 +44,7 @@ function Product() {
     useEffect(() => {
         const getStats = async () => {
             try {
-                const res = await axiosInstance.get(`orders/income?pid=${id}`);
+                const res = await axoisInstance.get(`orders/income?pid=${id}`);
                 const list = res.data.sort((a, b) => a._id - b._id);
                 setPStats(
                     list.map((item) => ({
