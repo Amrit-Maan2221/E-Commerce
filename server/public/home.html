@@ -20,6 +20,8 @@
       <li><a class="nav-link" href="#Example_Usage">Example Usage</a></li>
       <li><a class="nav-link" href="#Auth">Auth Routes</a></li>
       <li><a class="nav-link" href="#Product">Product Routes</a></li>
+      <li><a class="nav-link" href="#Order">Order Routes</a></li>
+      <li><a class="nav-link" href="#Payment">Payment Routes</a></li>
       <li><a class="nav-link" href="#Contact">Contact Routes</a></li>
       <li><a class="nav-link" href="#Reference">Github Link</a></li>
     </ul>
@@ -107,9 +109,9 @@
                     const options = { method: 'POST',
                   headers: {Authorization: 'Bearer JWT_TOKEN_HERE', 'Content-Type': 'application/json'},
                   body: '{
-"firstname":"test@gmail.com",
-"lastname":"test@gmail.com",
-"username":"test@gmail.com"}'
+                  "firstname":"test@gmail.com",
+                  "lastname":"test@gmail.com",
+                  "username":"test@gmail.com"}'
                 };
                 
                 fetch('https://apus-ecommerce-api.onrender.com/
@@ -144,13 +146,22 @@ api/users/63a8cf12981d84d33d8bfcc2', options)
         <li>
           <b>/api/users/:passwordResetCode/reset-password</b> Reset the password
         </li>
+        <li>
+          <b>/api/users/delete/:id</b> Delete the User
+        </li>
+        <li>
+          <b>/api/users</b> Gives all the Users
+        </li>
+        <li>
+          <b>/api/users/stats</b> Give stats of Users
+        </li>
       </ul>
     </section>
     <section class="main-section" id="Product">
       <header>Product Routes</header>
       <ul>
         <li>
-          <b>/api/product/products:</b> Get All Products. This End Support further query on the basic of URL query
+          <b>/api/product/products :</b> Get All Products. This End Support further query on the basic of URL query
 
           <p>
             <strong>Request for Getting all the Products:</strong>
@@ -164,7 +175,35 @@ api/users/63a8cf12981d84d33d8bfcc2', options)
           </p>
         </li>
         <li>
-          <b>/api/product/create:</b> Create a New Product only if you are logged in as Admin
+          <b>/api/product/create</b> Create a New Product only if you are logged in as Admin
+        </li>
+        <li>
+          <b>/api/product/delete/:id</b> Delete the Product
+        </li>
+        <li>
+          <b>/api/product/update/:id</b> Update the Product
+        </li>
+      </ul>
+    </section>
+    <section class="main-section" id="Order">
+      <header>Order Routes</header>
+      <ul>
+        <li>
+          <b>/api/orders/create :</b> Create a new Order
+        </li>
+        <li>
+          <b>/api/orders</b> Get All the Orders
+        </li>
+        <li>
+          <b>/api/orders/income</b> Gives the monthly income from all the Orders
+        </li>
+      </ul>
+    </section>
+    <section class="main-section" id="Payment">
+      <header>Payment Routes</header>
+      <ul>
+        <li>
+          <b>/api/stripe/payment </b> Makes a payment
         </li>
       </ul>
     </section>
@@ -179,9 +218,9 @@ api/users/63a8cf12981d84d33d8bfcc2', options)
                       const options = {
                         method: 'POST',
                         body: '{
-"email":"test@gmail.com",
-"username":"John",
-"userMessage":"Message Here."}'
+                        "email":"test@gmail.com",
+                        "username":"John",
+                        "userMessage":"Message Here."}'
                       };
                       
                       fetch('https://apus-ecommerce-api.onrender.com/api/contact', options)
